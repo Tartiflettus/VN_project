@@ -1,0 +1,2 @@
+make -f WinMakefile
+pause

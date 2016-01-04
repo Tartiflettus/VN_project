@@ -1,0 +1,24 @@
+SYSCONF_LINK = g++
+CPPFLAGS     =
+CPPFLAGS     = -g -std=c++11 -ISFML-2.3.2/include
+LDFLAGS      = -Wall
+LIBS         = -LSFML-2.3.2/lib -lsfml-audio-d -lsfml-graphics-d -lsfml-window-d -lsfml-system-d
+
+
+
+DESTDIR = ./
+TARGET  = VN.exe
+
+OBJECTS := $(patsubst %.cpp,%.o,$(wildcard *.cpp))
+
+all: $(DESTDIR)$(TARGET)
+
+$(DESTDIR)$(TARGET): $(OBJECTS)
+	$(SYSCONF_LINK) -Wall $(LDFLAGS) -o $(DESTDIR)$(TARGET) $(OBJECTS) $(LIBS)
+
+$(OBJECTS): %.o: %.cpp
+	$(SYSCONF_LINK) -Wall $(CPPFLAGS) -c $(CFLAGS) $< -o $@
+
+clean:
+	erase -f $(OBJECTS)
+	erase $(TARGET)
