@@ -64,6 +64,7 @@ namespace edit
 							break;
 						case sf::Keyboard::Numpad1:
 							action.aItem = Action::character;
+							std::cout<< "character selected\n";
 							break;
 						case sf::Keyboard::Numpad2:
 							action.aItem = Action::text;
@@ -71,9 +72,11 @@ namespace edit
 							break;
 						case sf::Keyboard::Numpad3:
 							action.aItem = Action::voice;
+							std::cout<< "voice selected\n";
 							break;
 						case sf::Keyboard::Numpad4:
 							action.aItem = Action::music;
+							std::cout<< "music selected\n";
 							break;
 						default:
 							break;
@@ -83,7 +86,7 @@ namespace edit
 					break;
 				case sf::Event::TextEntered:
 					action.textBuffer += event.text.unicode;
-					std::cout<< "text entered\n";
+					//std::cout<< "text entered\n";
 					break;
 				default:
 					break;

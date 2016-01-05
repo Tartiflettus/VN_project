@@ -1,4 +1,5 @@
 #include "FileLoader.hpp"
+#include <iostream>
 
 
 std::wstring getBlock(std::wifstream &scenario, wchar_t start, wchar_t end)
@@ -127,6 +128,19 @@ std::wstring cutPath(const std::wstring &str)
 	}
 	return str.substr(posStart + 1, str.size());
 }
+
+
+
+
+std::wstring selectFile(const std::wstring& message)
+{
+	std::wcout<< message<< "\n? ";
+
+	std::wstring ans;
+	std::wcin>> ans;
+	return ans;
+}
+
 
 
 

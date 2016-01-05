@@ -9,6 +9,8 @@
 #include <SFML/Graphics/RenderStates.hpp>
 #include <SFML/Audio/Music.hpp>
 #include "SceneTypes.hpp"
+#include "FileLoader.hpp"
+
 
 namespace sf
 {

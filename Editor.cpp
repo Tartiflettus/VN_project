@@ -66,7 +66,7 @@ namespace edit
 	{
 		if(!action.textBuffer.isEmpty())
 		{
-			std::cout<< "unsigned int : "<< static_cast<unsigned int>(action.textBuffer[0])<< "\n";
+			//std::cout<< "unsigned int : "<< static_cast<unsigned int>(action.textBuffer[0])<< "\n";
 
 
 			for(std::size_t i = 0; i < action.textBuffer.getSize(); i++)
@@ -102,10 +102,38 @@ namespace edit
 
 	void Editor::handleVoice(Action &action)
 	{
+		if(action.v > 0)
+		{
+			m_voiceFile = selectFile(L"Select a voice file");
+			m_voiceFile = VOICE_PATH + m_voiceFile;
+			std::string file(m_voiceFile.begin(), m_voiceFile.end());
+			m_voice.stop();
+			m_voice.openFromFile(file);
+			m_voice.play();
+		}
+		else if(action.v < 0)
+		{
+			m_voice.stop();
+			m_voiceFile.clear();
+		}
 	}
 
 	void Editor::handleMusic(Action &action)
 	{
+		if(action.v > 0)
+		{
+			m_musicFile = selectFile(L"Select a music file");
+			m_musicFile = MUSIC_PATH + m_musicFile;
+			std::string file(m_musicFile.begin(), m_musicFile.end());
+			m_music.stop();
+			m_music.openFromFile(file);
+			m_music.play();
+		}
+		else if(action.v < 0)
+		{
+			m_music.stop();
+			m_musicFile.clear();
+		}
 	}
 
 
