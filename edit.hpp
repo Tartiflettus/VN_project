@@ -25,7 +25,8 @@ namespace edit
 			character,
 			text,
 			voice,
-			music
+			music,
+			invalidItem
 		};
 
 		Action();
@@ -45,6 +46,8 @@ namespace edit
 	void getEvents(sf::RenderWindow &window, Action &action);
 
 	void edit(sf::RenderWindow &window);
+
+	std::string toString(Action::item aItem);
 
 	//void updateAtomicScene(AtomicScene &scene, Action &action);
 

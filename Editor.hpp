@@ -12,6 +12,8 @@
 #include "FileLoader.hpp"
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/Text.hpp>
+#include "edit.hpp"
+#include <SFML/Graphics/VertexArray.hpp>
 
 
 namespace sf
@@ -35,10 +37,16 @@ namespace edit
 
 			Editor();
 
+			void handleAction(Action &action);
+
 			void handleCharacter(Action &action);
 			void handleText(Action &action);
 			void handleVoice(Action &action);
 			void handleMusic(Action &action);
+
+
+			void updateDisplayers();
+			void updateCharacterVertex();
 
 
 			static void loadStaticData();
@@ -49,6 +57,8 @@ namespace edit
 			virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 
 		private:
+			Action::item m_currentItem;
+
 			CharacterArray m_characters;
 			size_t m_curCharacter;
 
@@ -62,8 +72,9 @@ namespace edit
 			std::wstring m_musicFile;
 
 
-			//displayer
+			//displayers
 			mutable sf::Text m_displayer;
+			sf::VertexArray m_characterVertex;
 	};
 
 } //namespace edit

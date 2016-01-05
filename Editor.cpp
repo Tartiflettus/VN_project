@@ -18,8 +18,18 @@ namespace edit
 
 		m_displayer.setFont(stdFont);
 		m_displayer.setColor(sf::Color::White);
-		m_displayer.setString("voice: \nmusic: ");
-		
+		m_displayer.setString("mode: \nvoice: \nmusic: ");
+
+		m_currentItem = Action::invalidItem;
+
+		m_characterVertex.resize(4);
+		m_characterVertex.setPrimitiveType(sf::LinesStrip);
+		for(std::size_t i = 0; i < m_characterVertex.getVertexCount(); i++)
+		{
+			m_characterVertex[i].color = sf::Color::Yellow;
+		}
+
+		updateCharacterVertex();
 	}
 
 
@@ -30,6 +40,31 @@ namespace edit
 		{
 			std::cerr<< "Unable to load CANON.ttf\n";
 		}
+	}
+
+
+	void Editor::handleAction(Action &action)
+	{
+		m_currentItem = action.aItem;
+		switch(action.aItem)
+		{
+			case Action::character:
+				handleCharacter(action);
+				break;
+			case Action::text:
+				handleText(action);
+				break;
+			case Action::voice:
+				handleVoice(action);
+				break;
+			case Action::music:
+				handleMusic(action);
+				break;
+			default:
+				break;
+		}
+
+
 	}
 
 
@@ -146,6 +181,7 @@ namespace edit
 			m_music.stop();
 			m_music.openFromFile(file);
 			m_music.play();
+			m_music.setLoop(true);
 		}
 		else if(action.v < 0)
 		{
@@ -153,6 +189,50 @@ namespace edit
 			m_musicFile.clear();
 		}
 	}
+
+
+
+
+	void Editor::updateDisplayers()
+	{
+		sf::String displayerString;
+		displayerString += "mode: ";
+		displayerString += toString(m_currentItem);
+		displayerString += "\n";
+		displayerString += "voice: ";
+		displayerString += m_voiceFile;
+		displayerString += "\n";
+		displayerString += "music: ";
+		displayerString += m_musicFile;
+
+		m_displayer.setString(displayerString);
+
+		updateCharacterVertex();
+	}
+
+
+	void Editor::updateCharacterVertex()
+	{
+		//verify that we are correctly selecting a character
+		if(m_characters.size() - m_curCharacter > m_characters.size())
+		{
+			return;
+		}
+
+		sf::FloatRect bounds;
+		bounds = m_characters[m_curCharacter].second.getGlobalBounds();
+		m_characterVertex[0].position.x = bounds.left;
+		m_characterVertex[0].position.y = bounds.top;
+		m_characterVertex[1].position.x = bounds.left + bounds.width;
+		m_characterVertex[1].position.y = bounds.top;
+
+		m_characterVertex[2].position.x = bounds.left + bounds.width;
+		m_characterVertex[2].position.y = bounds.top + bounds.height;
+		m_characterVertex[3].position.x = bounds.left;
+		m_characterVertex[3].position.y = bounds.top + bounds.height;
+	}
+
+
 
 
 
@@ -165,17 +245,9 @@ namespace edit
 		tstream.clear();
 		tstream<< m_text;
 
-		//update the displayer
-		sf::String displayerString;
-		displayerString += "voice: ";
-		displayerString += m_voiceFile;
-		displayerString += L"\n";
-		displayerString += "music: ";
-		displayerString += m_musicFile;
-
-		m_displayer.setString(displayerString);
 
 		target.draw(m_displayer);
+		target.draw(m_characterVertex);
 
 		//std::cout<< m_curCharacter<< " : "<< m_characters.size()<<"\n";
 	}

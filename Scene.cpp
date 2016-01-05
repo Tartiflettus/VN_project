@@ -165,7 +165,7 @@ void Scene::updateCharacters()
 
 	for(CharactersPtrList::iterator it = currentCharacters.begin(); it != currentCharacters.end(); it++)
 	{
-		//we ust be overwritting in this function
+		//we must be overwritting in this function
 		if(*it)
 		{
 			m_characters.push_back(

@@ -8,6 +8,32 @@
 
 namespace edit
 {
+	
+	std::string toString(Action::item aItem)
+	{
+		switch(aItem)
+		{
+			case Action::character:
+				return std::string("character");
+				break;
+			case Action::text:
+				return std::string("text");
+				break;
+			case Action::voice:
+				return std::string("voice");
+				break;
+			case Action::music:
+				return std::string("music");
+				break;
+			default:
+				return std::string("invalid Item");
+				break;
+		}
+
+		//instruction that shall never be executed
+		return std::string();
+	}
+
 
 	Action::Action()
 	{
@@ -114,24 +140,9 @@ namespace edit
 			getEvents(window, action);
 
 
-			switch(action.aItem)
-			{
-				case Action::character:
-					editor.handleCharacter(action);
-					break;
-				case Action::text:
-					editor.handleText(action);
-					break;
-				case Action::voice:
-					editor.handleVoice(action);
-					break;
-				case Action::music:
-					editor.handleMusic(action);
-					break;
-				default:
-					break;
-			}
+			editor.handleAction(action);
 
+			editor.updateDisplayers();
 
 			window.clear(sf::Color::Black);
 
