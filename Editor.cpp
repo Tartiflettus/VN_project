@@ -2,6 +2,7 @@
 #include "edit.hpp"
 #include <SFML/Graphics/RenderTarget.hpp>
 #include "TextBoxStream.hpp"
+#include "Scene.hpp"
 
 #include <iostream>
 
@@ -22,11 +23,11 @@ namespace edit
 
 		m_currentItem = Action::invalidItem;
 
-		m_characterVertex.resize(4);
+		m_characterVertex.resize(5);
 		m_characterVertex.setPrimitiveType(sf::LinesStrip);
 		for(std::size_t i = 0; i < m_characterVertex.getVertexCount(); i++)
 		{
-			m_characterVertex[i].color = sf::Color::Yellow;
+			m_characterVertex[i].color = sf::Color::Red;
 		}
 
 		updateCharacterVertex();
@@ -109,6 +110,34 @@ namespace edit
 			for(size_t i = 0; i < m_characters.size(); i++)
 			{
 				m_characters[i].second.setSlot(i+1, m_characters.size());
+			}
+		}
+
+		if(action.v > 0)
+		{	
+			//aliases to simplify the reading
+			std::wstring &curFile(m_characters[m_curCharacter].first);
+			Character &curCharacter(m_characters[m_curCharacter].second);
+
+
+			curFile = selectFile(L"Select a character file");
+			curFile = CHARACTER_PATH + m_characters[m_curCharacter].first;
+			std::string file(curFile.begin(), curFile.end());
+
+			//load the texture only if needed
+			texMap::iterator it;
+			it = Scene::charactersTextures.find(curFile);
+			if(it != Scene::charactersTextures.end())
+			{
+				curCharacter.setTexture(it->second);
+			}
+			else
+			{
+				//load the texture if not already done
+				sf::Texture tex;
+				tex.loadFromFile(file);
+				Scene::charactersTextures[curFile] = tex;
+				curCharacter.setTexture(Scene::charactersTextures[curFile]);
 			}
 		}
 		
@@ -195,6 +224,8 @@ namespace edit
 
 	void Editor::updateDisplayers()
 	{
+		updateCharacterVertex();
+
 		sf::String displayerString;
 		displayerString += "mode: ";
 		displayerString += toString(m_currentItem);
@@ -206,8 +237,6 @@ namespace edit
 		displayerString += m_musicFile;
 
 		m_displayer.setString(displayerString);
-
-		updateCharacterVertex();
 	}
 
 
@@ -223,13 +252,17 @@ namespace edit
 		bounds = m_characters[m_curCharacter].second.getGlobalBounds();
 		m_characterVertex[0].position.x = bounds.left;
 		m_characterVertex[0].position.y = bounds.top;
+
 		m_characterVertex[1].position.x = bounds.left + bounds.width;
 		m_characterVertex[1].position.y = bounds.top;
 
 		m_characterVertex[2].position.x = bounds.left + bounds.width;
 		m_characterVertex[2].position.y = bounds.top + bounds.height;
+
 		m_characterVertex[3].position.x = bounds.left;
 		m_characterVertex[3].position.y = bounds.top + bounds.height;
+
+		m_characterVertex[4] = m_characterVertex[0];
 	}
 
 

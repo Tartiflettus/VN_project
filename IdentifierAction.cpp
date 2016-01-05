@@ -199,7 +199,7 @@ void IdentifierCharacter::operator()(AtomicScene &scene)
 	}
 
 	//lower the character's dimension
-	newChar->setScale(0.5, 0.5);
+	//newChar->setScale(0.5, 0.5);
 
 	scene.addCharacter(newChar);
 

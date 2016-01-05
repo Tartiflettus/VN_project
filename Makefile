@@ -1,7 +1,7 @@
 SYSCONF_LINK = g++
 CPPFLAGS     =
 CPPFLAGS     = -g -std=c++11
-LDFLAGS      = -Wall
+LDFLAGS      = -g
 LIBS         = -lsfml-audio -lsfml-graphics -lsfml-window -lsfml-system
 
 

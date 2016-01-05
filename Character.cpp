@@ -16,6 +16,8 @@ void Character::setTexture(const sf::Texture &texture)
 	//Set origin at the center of the sprite
 	sf::FloatRect rect = getGlobalBounds();
 	setOrigin(rect.width/2, rect.height);
+
+	setScale(0.5, 0.5);
 }
 
 

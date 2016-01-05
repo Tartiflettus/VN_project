@@ -11,7 +11,7 @@
 
 
 
-const std::wstring CHARACTER_PATH = std::wstring(L"gameData/images/characters");
+const std::wstring CHARACTER_PATH = std::wstring(L"gameData/images/characters/");
 
 
 
