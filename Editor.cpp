@@ -8,13 +8,31 @@
 
 namespace edit
 {
+	sf::Font Editor::stdFont;
 
 	Editor::Editor()
 	{
 		m_curCharacter = 0;
 		m_characters.push_back(CharacterInfo(L"", Character()));
 		m_characters[0].second.setSlot(1, 1);
+
+		m_displayer.setFont(stdFont);
+		m_displayer.setColor(sf::Color::White);
+		m_displayer.setString("voice: \nmusic: ");
+		
 	}
+
+
+
+	void Editor::loadStaticData()
+	{
+		if(!stdFont.loadFromFile(FONT_PATH + std::string("CANON.ttf")))
+		{
+			std::cerr<< "Unable to load CANON.ttf\n";
+		}
+	}
+
+
 
 	void Editor::handleCharacter(Action &action)
 	{
@@ -146,6 +164,18 @@ namespace edit
 		}
 		tstream.clear();
 		tstream<< m_text;
+
+		//update the displayer
+		sf::String displayerString;
+		displayerString += "voice: ";
+		displayerString += m_voiceFile;
+		displayerString += L"\n";
+		displayerString += "music: ";
+		displayerString += m_musicFile;
+
+		m_displayer.setString(displayerString);
+
+		target.draw(m_displayer);
 
 		//std::cout<< m_curCharacter<< " : "<< m_characters.size()<<"\n";
 	}

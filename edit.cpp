@@ -100,6 +100,8 @@ namespace edit
 
 	void edit(sf::RenderWindow &window)
 	{
+		Editor::loadStaticData();
+
 		Action action;
 		Editor editor;
 

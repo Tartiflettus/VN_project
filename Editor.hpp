@@ -10,6 +10,8 @@
 #include <SFML/Audio/Music.hpp>
 #include "SceneTypes.hpp"
 #include "FileLoader.hpp"
+#include <SFML/Graphics/Font.hpp>
+#include <SFML/Graphics/Text.hpp>
 
 
 namespace sf
@@ -38,6 +40,11 @@ namespace edit
 			void handleVoice(Action &action);
 			void handleMusic(Action &action);
 
+
+			static void loadStaticData();
+
+			static sf::Font stdFont;
+
 		protected:
 			virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 
@@ -53,6 +60,10 @@ namespace edit
 
 			sf::Music m_music;
 			std::wstring m_musicFile;
+
+
+			//displayer
+			mutable sf::Text m_displayer;
 	};
 
 } //namespace edit
