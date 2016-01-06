@@ -173,8 +173,8 @@ namespace edit
 			m_voiceFile = VOICE_PATH + m_voiceFile;
 			std::string file(m_voiceFile.begin(), m_voiceFile.end());
 			m_voice.stop();
-			m_voice.openFromFile(file);
-			m_voice.play();
+			if(m_voice.openFromFile(file))
+				m_voice.play();
 		}
 		else if(action.v < 0)
 		{
@@ -191,9 +191,9 @@ namespace edit
 			m_musicFile = MUSIC_PATH + m_musicFile;
 			std::string file(m_musicFile.begin(), m_musicFile.end());
 			m_music.stop();
-			m_music.openFromFile(file);
-			m_music.play();
-			m_music.setLoop(true);
+			if(m_music.openFromFile(file))
+				m_music.play();
+				m_music.setLoop(true);
 		}
 		else if(action.v < 0)
 		{

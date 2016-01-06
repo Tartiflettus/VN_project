@@ -11,6 +11,8 @@
 #include "Scene.hpp"
 #include "Timer.hpp"
 
+#include "Button.hpp"
+
 
 namespace game
 {
@@ -52,6 +54,14 @@ namespace game
 					break;
 				case sf::Event::KeyReleased:
 					break;
+				/* case sf::Event::MouseButtonPressed: */
+				/* 	switch(event.mouseButton.button) */
+				/* 	{ */
+				/* 		case sf::Mouse::Left: */
+							
+				/* 			break; */
+				/* 	} */
+				/* 	break; */
 				default:
 					break;
 			}
@@ -145,6 +155,10 @@ namespace game
 
 
 		Timer loopTimer(sf::seconds(1./60.)); //60 fps
+
+		Button::loadStaticData();
+		Button button(L"Ceci est un bouton ! è_é");
+
 		
 		//main loop
 		while(!action.closeRequest)
@@ -166,6 +180,7 @@ namespace game
 			window.draw(mainScene);
 			window.draw(textBoxSprite);
 			window.draw(tstream);
+			window.draw(button);
 			
 			window.display();
 

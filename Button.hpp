@@ -24,6 +24,8 @@ class Button: public sf::Drawable, public sf::Transformable
 	public:
 		Button(const std::wstring& msg = std::wstring());
 
+		bool wasClicked(const sf::Vector2f& pointer) const;
+
 		static void loadStaticData();
 
 		static sf::Font stdFont;
@@ -34,6 +36,7 @@ class Button: public sf::Drawable, public sf::Transformable
 
 	private:
 		void initText();
+		void updateDisplay();
 
 		sf::RectangleShape m_sprite;
 		sf::Text m_text;
