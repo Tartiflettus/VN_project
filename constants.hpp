@@ -10,5 +10,8 @@ const sf::FloatRect TEXTBOX_RECT = sf::FloatRect(40, 528, 1200, 144);
 const sf::Vector2f NAME_POS = sf::Vector2f(40, 528-30);
 
 
+const std::string FONT_PATH = std::string("gameData/fonts/");
+
+
 #endif //DEF_CONSTANTS_HPP
 

@@ -20,7 +20,6 @@ namespace sf
 
 
 
-const std::string FONT_PATH = std::string("gameData/fonts/");
 
 
 class TextBoxStream: public sf::Drawable

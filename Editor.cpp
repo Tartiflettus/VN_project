@@ -124,23 +124,6 @@ namespace edit
 			curFile = CHARACTER_PATH + m_characters[m_curCharacter].first;
 
 			curCharacter.setTexture(Scene::requestCharacterTexture(curFile));
-			/*std::string file(curFile.begin(), curFile.end());
-
-			//load the texture only if needed
-			texMap::iterator it;
-			it = Scene::charactersTextures.find(curFile);
-			if(it != Scene::charactersTextures.end())
-			{
-				curCharacter.setTexture(it->second);
-			}
-			else
-			{
-				//load the texture if not already done
-				sf::Texture tex;
-				tex.loadFromFile(file);
-				Scene::charactersTextures[curFile] = tex;
-				curCharacter.setTexture(Scene::charactersTextures[curFile]);
-			}*/
 		}
 	}
 
@@ -298,8 +281,8 @@ namespace edit
 		tstream<< m_text;
 
 
-		target.draw(m_displayer);
-		target.draw(m_characterVertex);
+		target.draw(m_displayer, states);
+		target.draw(m_characterVertex, states);
 
 		//std::cout<< m_curCharacter<< " : "<< m_characters.size()<<"\n";
 	}

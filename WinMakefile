@@ -20,5 +20,5 @@ $(OBJECTS): %.o: %.cpp
 	$(SYSCONF_LINK) -Wall $(CPPFLAGS) -c $(CFLAGS) $< -o $@
 
 clean:
-	erase -f $(OBJECTS)
+	erase $(OBJECTS)
 	erase $(TARGET)

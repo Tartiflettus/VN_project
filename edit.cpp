@@ -4,6 +4,7 @@
 #include "Timer.hpp"
 #include "Editor.hpp"
 #include "TextBoxStream.hpp"
+#include "OpenFileError.hpp"
 
 
 namespace edit
@@ -126,12 +127,28 @@ namespace edit
 
 	void edit(sf::RenderWindow &window)
 	{
+		sf::Time loadingDuration;
+		sf::Clock loadingClock;
+		loadingDuration = loadingClock.getElapsedTime();
+
+		std::cout<< "Loading ...\n";
+
 		Editor::loadStaticData();
 
 		Action action;
 		Editor editor;
 
 		TextBoxStream::loadStaticData();
+
+		sf::Texture textBoxTexture;
+		if(!textBoxTexture.loadFromFile(sf::String(L"gameData/images/text_boxes/textbox.png")))
+		{
+			throw OpenFileError();
+		}
+		sf::Sprite textBoxSprite(textBoxTexture);
+
+		std::cout<<".. Finished !\n";
+		std::cout<< (loadingClock.getElapsedTime() - loadingDuration).asSeconds()<< "\n";
 
 		Timer loopTimer(sf::seconds(1./60.)); //60 fps
 
@@ -147,6 +164,7 @@ namespace edit
 			window.clear(sf::Color::Black);
 
 			window.draw(editor);
+			window.draw(textBoxSprite);
 			window.draw(tstream);
 
 			window.display();
