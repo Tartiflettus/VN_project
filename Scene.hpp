@@ -48,6 +48,7 @@ class Scene: public sf::Drawable
 		void loadFromString(const std::wstring &string);
 		
 		static std::map<std::wstring, sf::Texture> charactersTextures;
+		static sf::Texture& requestCharacterTexture(const std::wstring& file);
 
 		void loadNextAtomicScene();
 

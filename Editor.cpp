@@ -122,7 +122,9 @@ namespace edit
 
 			curFile = selectFile(L"Select a character file");
 			curFile = CHARACTER_PATH + m_characters[m_curCharacter].first;
-			std::string file(curFile.begin(), curFile.end());
+
+			curCharacter.setTexture(Scene::requestCharacterTexture(curFile));
+			/*std::string file(curFile.begin(), curFile.end());
 
 			//load the texture only if needed
 			texMap::iterator it;
@@ -138,10 +140,8 @@ namespace edit
 				tex.loadFromFile(file);
 				Scene::charactersTextures[curFile] = tex;
 				curCharacter.setTexture(Scene::charactersTextures[curFile]);
-			}
+			}*/
 		}
-		
-
 	}
 
 	void Editor::handleText(Action &action)
@@ -247,9 +247,28 @@ namespace edit
 		{
 			return;
 		}
+		
 
 		sf::FloatRect bounds;
 		bounds = m_characters[m_curCharacter].second.getGlobalBounds();
+
+		//If there is no sprite : draw a vertical line to indicate what slot is currently selected
+		if(bounds.width <= 1.)
+		{
+			m_characterVertex[0].position.x = m_characters[m_curCharacter].second.getPosition().x;
+			m_characterVertex[0].position.y = 0.;
+			
+			m_characterVertex[1].position.x = m_characterVertex[0].position.x;
+			m_characterVertex[1].position.y = WINDOW_SIZE.y;
+
+			for(std::size_t i = 2; i < m_characterVertex.getVertexCount(); i++)
+			{
+				m_characterVertex[i].position = m_characterVertex[1].position;
+			}
+
+			return;
+		}
+
 		m_characterVertex[0].position.x = bounds.left;
 		m_characterVertex[0].position.y = bounds.top;
 

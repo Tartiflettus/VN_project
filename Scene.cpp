@@ -99,6 +99,31 @@ std::map<std::wstring, sf::Texture> Scene::charactersTextures;
 
 
 
+
+sf::Texture& Scene::requestCharacterTexture(const std::wstring& file)
+{
+	std::string cfile(file.begin(), file.end());
+
+	texMap::iterator it;
+	it = charactersTextures.find(file);
+	if(it != charactersTextures.end())
+	{
+		return it->second;
+	}
+	else
+	{
+		//load the texture if not already done
+		sf::Texture tex;
+		tex.loadFromFile(cfile);
+		charactersTextures[file] = tex;
+		return charactersTextures[file];
+	}
+
+}
+
+
+
+
 void Scene::loadNextAtomicScene()
 {
 	//test if the scene is finished
