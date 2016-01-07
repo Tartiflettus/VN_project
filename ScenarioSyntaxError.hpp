@@ -27,7 +27,7 @@ class ScenarioSyntaxError: public std::exception
 		//typedef pv::ScenarioErrorType errorType;
 
 		ScenarioSyntaxError(errorType flags);
-		virtual ~ScenarioSyntaxError();
+		virtual ~ScenarioSyntaxError() throw();
 
 		virtual const char* what() const throw();
 	

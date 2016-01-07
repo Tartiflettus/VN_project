@@ -23,7 +23,7 @@ class Button: public sf::Drawable, public sf::Transformable
 {
 	public:
 		Button(const std::wstring& msg = std::wstring());
-
+		
 		bool wasClicked(const sf::Vector2f& pointer) const;
 
 		static void loadStaticData();

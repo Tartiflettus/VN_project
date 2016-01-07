@@ -39,6 +39,7 @@ namespace edit
 	Action::Action()
 	{
 		nextPressed = false;
+		precPressed = false;
 		closeRequest = false;
 
 
@@ -48,10 +49,42 @@ namespace edit
 		aItem = character;
 	}
 
+
+
+
+	void updateEditorList(std::list<Editor> &editors, std::list<Editor>::iterator &it, Action &action, sf::Music& voice, sf::Music& music)
+	{
+		if(action.nextPressed)
+		{
+			it++;
+			if(it == editors.end())
+			{
+				it = editors.insert(it, Editor(voice, music));
+			}
+		}
+		if(action.precPressed)
+		{
+			if(it == editors.begin())
+			{
+				it = editors.insert(it, Editor(voice, music));
+			}
+			else
+			{
+				it--;
+			}
+
+		}
+
+		//it->refresh();
+	}
+
+
+
 	void getEvents(sf::RenderWindow &window, Action &action)
 	{
 		//reset action
 		action.nextPressed = false;
+		action.precPressed = false;
 		action.closeRequest = false;
 		action.h = 0;
 		action.v = 0;
@@ -72,10 +105,10 @@ namespace edit
 							action.closeRequest = true;
 							break;
 						case sf::Keyboard::Space:
-							action.nextPressed = true;
+							//action.nextPressed = true;
 							break;
 						case sf::Keyboard::Return:
-							action.nextPressed = true;
+							//action.nextPressed = true;
 							break;
 						case sf::Keyboard::Left:
 							action.h--;
@@ -119,6 +152,13 @@ namespace edit
 					break;
 			}
 		}
+
+		//verify if we want to take the next or prec Editor
+		action.precPressed = action.aItem != Action::text && action.textBuffer.find(L'-') != std::wstring::npos;
+
+		action.nextPressed = action.aItem != Action::text && action.textBuffer.find(L'+') != std::wstring::npos;
+
+		
 	}
 
 
@@ -135,8 +175,15 @@ namespace edit
 
 		Editor::loadStaticData();
 
+		std::list<Editor> editorList;
+		std::list<Editor>::iterator curEditor = editorList.begin();
+
+		sf::Music voice;
+		sf::Music music;
+
 		Action action;
-		Editor editor;
+
+		curEditor = editorList.insert(curEditor, Editor(voice, music));
 
 		TextBoxStream::loadStaticData();
 
@@ -146,6 +193,8 @@ namespace edit
 			throw OpenFileError();
 		}
 		sf::Sprite textBoxSprite(textBoxTexture);
+
+
 
 		std::cout<<".. Finished !\n";
 		std::cout<< (loadingClock.getElapsedTime() - loadingDuration).asSeconds()<< "\n";
@@ -157,13 +206,13 @@ namespace edit
 			getEvents(window, action);
 
 
-			editor.handleAction(action);
+			curEditor->handleAction(action);
 
-			editor.updateDisplayers();
+			curEditor->updateDisplayers();
 
 			window.clear(sf::Color::Black);
 
-			window.draw(editor);
+			window.draw(*curEditor);
 			window.draw(textBoxSprite);
 			window.draw(tstream);
 

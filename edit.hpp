@@ -8,6 +8,9 @@
 
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/System/String.hpp>
+#include "editTypes.hpp"
+#include <list>
+#include "Editor.hpp"
 
 
 namespace sf
@@ -18,36 +21,14 @@ namespace sf
 
 namespace edit
 {
-	struct Action
-	{
-		enum item
-		{
-			character,
-			text,
-			voice,
-			music,
-			invalidItem
-		};
-
-		Action();
-
-		item aItem;
-
-		bool nextPressed;
-		bool closeRequest;
-
-		sf::String textBuffer;		
-
-		int h; //left and right keys
-		int v; //up and down keys
-
-	};
-
+	
 	void getEvents(sf::RenderWindow &window, Action &action);
 
 	void edit(sf::RenderWindow &window);
 
 	std::string toString(Action::item aItem);
+
+	void updateEditorList(std::list<Editor> &editors, std::list<Editor>::iterator &it, Action &action, sf::Music& voice, sf::Music& music);
 
 	//void updateAtomicScene(AtomicScene &scene, Action &action);
 

@@ -12,7 +12,7 @@
 #include "FileLoader.hpp"
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/Text.hpp>
-#include "edit.hpp"
+#include "editTypes.hpp"
 #include <SFML/Graphics/VertexArray.hpp>
 
 
@@ -25,8 +25,6 @@ namespace sf
 
 namespace edit
 {
-	class Action;
-
 	class Editor: public sf::Drawable
 	{
 		public:
@@ -35,7 +33,7 @@ namespace edit
 			typedef std::vector<std::pair<std::wstring, Character> > CharacterArray;
 
 
-			Editor();
+			Editor(sf::Music& voice, sf::Music& music);
 
 			void handleAction(Action &action);
 
@@ -65,10 +63,10 @@ namespace edit
 			
 			std::wstring m_text;
 
-			sf::Music m_voice;
+			sf::Music *m_voice;
 			std::wstring m_voiceFile;
 
-			sf::Music m_music;
+			sf::Music *m_music;
 			std::wstring m_musicFile;
 
 

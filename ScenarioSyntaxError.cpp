@@ -9,7 +9,7 @@ ScenarioSyntaxError::ScenarioSyntaxError(errorType flags)
 
 
 
-ScenarioSyntaxError::~ScenarioSyntaxError()
+ScenarioSyntaxError::~ScenarioSyntaxError() throw()
 {
 }
 

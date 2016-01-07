@@ -11,7 +11,7 @@ namespace edit
 {
 	sf::Font Editor::stdFont;
 
-	Editor::Editor()
+	Editor::Editor(sf::Music& voice, sf::Music& music)
 	{
 		m_curCharacter = 0;
 		m_characters.push_back(CharacterInfo(L"", Character()));
@@ -31,6 +31,9 @@ namespace edit
 		}
 
 		updateCharacterVertex();
+
+		m_voice = &voice;
+		m_music = &music;
 	}
 
 
@@ -172,13 +175,13 @@ namespace edit
 			m_voiceFile = selectFile(L"Select a voice file");
 			m_voiceFile = VOICE_PATH + m_voiceFile;
 			std::string file(m_voiceFile.begin(), m_voiceFile.end());
-			m_voice.stop();
-			if(m_voice.openFromFile(file))
-				m_voice.play();
+			m_voice->stop();
+			if(m_voice->openFromFile(file))
+				m_voice->play();
 		}
 		else if(action.v < 0)
 		{
-			m_voice.stop();
+			m_voice->stop();
 			m_voiceFile.clear();
 		}
 	}
@@ -190,14 +193,14 @@ namespace edit
 			m_musicFile = selectFile(L"Select a music file");
 			m_musicFile = MUSIC_PATH + m_musicFile;
 			std::string file(m_musicFile.begin(), m_musicFile.end());
-			m_music.stop();
-			if(m_music.openFromFile(file))
-				m_music.play();
-				m_music.setLoop(true);
+			m_music->stop();
+			if(m_music->openFromFile(file))
+				m_music->play();
+				m_music->setLoop(true);
 		}
 		else if(action.v < 0)
 		{
-			m_music.stop();
+			m_music->stop();
 			m_musicFile.clear();
 		}
 	}
