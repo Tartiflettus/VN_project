@@ -21,7 +21,6 @@ namespace sf
 
 namespace edit
 {
-	
 	void getEvents(sf::RenderWindow &window, Action &action);
 
 	void edit(sf::RenderWindow &window);
@@ -29,6 +28,8 @@ namespace edit
 	std::string toString(Action::item aItem);
 
 	void updateEditorList(std::list<Editor> &editors, std::list<Editor>::iterator &it, Action &action, sf::Music& voice, sf::Music& music);
+
+	void saveToFile(std::list<Editor>& editors, const std::string& file);
 
 	//void updateAtomicScene(AtomicScene &scene, Action &action);
 

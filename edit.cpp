@@ -5,6 +5,7 @@
 #include "Editor.hpp"
 #include "TextBoxStream.hpp"
 #include "OpenFileError.hpp"
+#include <fstream>
 
 
 namespace edit
@@ -165,6 +166,24 @@ namespace edit
 
 
 
+	void saveToFile(std::list<Editor>& editors, const std::string& file)
+	{
+		std::wofstream fileStream;
+		fileStream.imbue(std::locale(""));
+
+		fileStream<< L"\n";
+		
+		//write each Editor
+		for(std::list<Editor>::iterator it = editors.begin(); it != editors.end(); it++)
+		{
+			it->saveToStream(fileStream);
+		}
+	}
+
+
+
+
+
 	void edit(sf::RenderWindow &window)
 	{
 		sf::Time loadingDuration;
@@ -221,6 +240,12 @@ namespace edit
 
 			loopTimer.autoSleep();
 		}
+
+		std::wstring saveFile = selectFile(L"select a file to save in");
+
+		saveFile = std::wstring(SCENE_DIRECTORY.begin(), SCENE_DIRECTORY.end()) + saveFile;
+
+		saveToFile(editorList, std::string(saveFile.begin(), saveFile.end()));
 	}
 
 

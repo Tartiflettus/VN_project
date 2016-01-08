@@ -3,6 +3,7 @@
 #include <SFML/Graphics/RenderTarget.hpp>
 #include "TextBoxStream.hpp"
 #include "Scene.hpp"
+#include <fstream>
 
 #include <iostream>
 
@@ -271,6 +272,87 @@ namespace edit
 	}
 
 
+
+
+	
+	void Editor::saveToStream(std::wofstream& stream)
+	{
+		stream<< L"[\n";
+		
+		//save the characters
+		for(std::size_t i = 0; i < m_characters.size(); i++)
+		{
+			saveCharacter(i, stream);	
+		}
+
+		saveText(stream);
+		saveVoice(stream);
+		saveMusic(stream);
+
+		stream<< L']';
+	}
+
+
+	void Editor::saveCharacter(std::size_t pos, std::wofstream& stream)
+	{
+		//reference to easy the reading
+		Character& curCharacter(m_characters[pos].second);
+		std::wstring curFile(m_characters[pos].first);
+
+		if(!curFile.empty())
+		{
+
+			stream<< L"character{";
+
+			auto slots = curCharacter.getSlot();
+			if(slots.second != 0) //there are indeed slots
+			{
+				stream<< L"slot "<< slots.first<< L' '<< slots.second;
+			}
+			else //write the position instead
+			{
+				auto curPos = curCharacter.getPosition();
+				stream<< L"pos "<< curPos.x<< L' '<< curPos.y;
+			}
+
+			stream<< L" }";
+
+		}
+	}
+
+	void Editor::saveText(std::wofstream& stream)
+	{
+		stream<< L"text{";
+		stream<< L"cl ";
+
+		stream<< m_text;
+
+		stream<< L" }";
+	}
+
+	void Editor::saveVoice(std::wofstream& stream)
+	{
+		if(!m_voiceFile.empty())
+		{
+			stream<< L"voice{";
+
+			stream<< m_voiceFile;
+
+			stream<< L" }";
+		}
+	}
+
+	void Editor::saveMusic(std::wofstream& stream)
+	{
+		if(!m_musicFile.empty())
+		{
+			stream<< L"music{";
+
+			stream<< m_musicFile;
+
+			stream<< L" }";
+		}
+	}
 
 
 

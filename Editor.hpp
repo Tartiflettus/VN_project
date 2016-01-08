@@ -47,6 +47,12 @@ namespace edit
 			void updateCharacterVertex();
 
 
+			void saveToStream(std::wofstream& stream);
+			void saveCharacter(std::size_t pos, std::wofstream& stream);
+			void saveText(std::wofstream& stream);
+			void saveVoice(std::wofstream& stream);
+			void saveMusic(std::wofstream& stream);
+
 			static void loadStaticData();
 
 			static sf::Font stdFont;

@@ -5,6 +5,7 @@
 
 Character::Character()
 {
+	setSlot(0, 0);
 }
 
 
