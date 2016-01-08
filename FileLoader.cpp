@@ -130,6 +130,18 @@ std::wstring cutPath(const std::wstring &str)
 }
 
 
+std::string cutPath(const std::string &str)
+{
+	size_t posStart = str.rfind('/');
+	if(posStart == std::wstring::npos)
+	{
+		return str;
+	}
+	return str.substr(posStart + 1, str.size());
+}
+
+
+
 
 
 std::wstring selectFile(const std::wstring& message)

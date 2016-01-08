@@ -168,7 +168,12 @@ namespace edit
 
 	void saveToFile(std::list<Editor>& editors, const std::string& file)
 	{
-		std::wofstream fileStream;
+		std::locale::global(std::locale(""));
+		std::wofstream fileStream(file);
+		if(!fileStream.is_open())
+		{
+			throw OpenFileError();
+		}
 		fileStream.imbue(std::locale(""));
 
 		fileStream<< L"\n";
@@ -245,6 +250,7 @@ namespace edit
 
 		saveFile = std::wstring(SCENE_DIRECTORY.begin(), SCENE_DIRECTORY.end()) + saveFile;
 
+		std::wcout<< saveFile<< "\n";
 		saveToFile(editorList, std::string(saveFile.begin(), saveFile.end()));
 	}
 

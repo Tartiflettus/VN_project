@@ -29,6 +29,7 @@ std::wstring::size_type findPrefix(const std::wstring &str, const std::wstring &
 
 
 std::wstring cutPath(const std::wstring &str);
+std::string cutPath(const std::string &str);
 
 
 std::wstring selectFile(const std::wstring& message = std::wstring(L"select a file"));

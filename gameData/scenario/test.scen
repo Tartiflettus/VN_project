@@ -1,0 +1,12 @@
+
+[
+character{Batler.png slot 1 1 }
+text{cl 1
+1 }
+]
+[
+character{Yamada.png slot 2 2 }
+text{cl 2 2 2 2 2 2
+p }
+music{hope.ogg }
+]

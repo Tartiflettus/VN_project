@@ -85,7 +85,7 @@ namespace game
 
 		std::wifstream mainScenario;
 		mainScenario.imbue(std::locale(""));
-		mainScenario.open(SCENE_DIRECTORY + std::string("main.scen"));
+		mainScenario.open(SCENE_DIRECTORY + std::string("test.scen"));
 		if(!mainScenario.is_open())
 		{
 			throw OpenFileError();

@@ -289,7 +289,7 @@ namespace edit
 		saveVoice(stream);
 		saveMusic(stream);
 
-		stream<< L']';
+		stream<< L"]\n";
 	}
 
 
@@ -303,19 +303,21 @@ namespace edit
 		{
 
 			stream<< L"character{";
+			
+			stream<< cutPath(curFile);
 
 			auto slots = curCharacter.getSlot();
 			if(slots.second != 0) //there are indeed slots
 			{
-				stream<< L"slot "<< slots.first<< L' '<< slots.second;
+				stream<< L" slot "<< slots.first<< L' '<< slots.second;
 			}
 			else //write the position instead
 			{
 				auto curPos = curCharacter.getPosition();
-				stream<< L"pos "<< curPos.x<< L' '<< curPos.y;
+				stream<< L" pos "<< curPos.x<< L' '<< curPos.y;
 			}
 
-			stream<< L" }";
+			stream<< L" }\n";
 
 		}
 	}
@@ -325,9 +327,9 @@ namespace edit
 		stream<< L"text{";
 		stream<< L"cl ";
 
-		stream<< m_text;
+		stream<< cutPath(m_text);
 
-		stream<< L" }";
+		stream<< L" }\n";
 	}
 
 	void Editor::saveVoice(std::wofstream& stream)
@@ -336,9 +338,9 @@ namespace edit
 		{
 			stream<< L"voice{";
 
-			stream<< m_voiceFile;
+			stream<< cutPath(m_voiceFile);
 
-			stream<< L" }";
+			stream<< L" }\n";
 		}
 	}
 
@@ -348,9 +350,9 @@ namespace edit
 		{
 			stream<< L"music{";
 
-			stream<< m_musicFile;
+			stream<< cutPath(m_musicFile);
 
-			stream<< L" }";
+			stream<< L" }\n";
 		}
 	}
 
