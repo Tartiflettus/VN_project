@@ -205,6 +205,7 @@ namespace edit
 		{
 			getEvents(window, action);
 
+			updateEditorList(editorList, curEditor, action, voice, music);
 
 			curEditor->handleAction(action);
 
