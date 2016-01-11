@@ -1,14 +1,21 @@
 
 [
-character{Batler.png slot 1 2 }
-character{Yamada.png slot 2 2 }
-text{cl  }
+text{cl Dans un monde fait de ténèbres naquit un homme. }
 music{hope.ogg }
 ]
 [
-character{Batler.png slot 1 4 }
-character{Batler.png slot 2 4 }
-character{Batler.png slot 3 4 }
-character{Batler.png slot 4 4 }
-text{cl MULTIPLICATION !!!!!!!!!!!! }
+text{cl Dans un monde fait de ténèbres naquit un homme.
+Il était le 4848165319684635168115651 fils de la 123456789 génération des porteurs de patates }
+]
+[
+text{cl Dans un monde fait de ténèbres naquit un homme.
+Il était le 4848165319684635168115651 fils de la 123456789 génération des porteurs de patates.
+Le nom de cet élu des dieux assoupis à force de manger de la raclette ? }
+]
+[
+character{Batler.png slot 1 1 }
+text{cl Dans un monde fait de ténèbres naquit un homme.
+Il était le 4848165319684635168115651 fils de la 123456789 génération des porteurs de patates.
+Le nom de cet élu des dieux assoupis à force de manger de la raclette ?
+JEAN-PHILIPPE! }
 ]
