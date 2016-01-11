@@ -6,8 +6,8 @@ Because our lives are difficult, a scenario editor is available, but perhaps dif
 
 Current state of the project:
 - Compiles without problem on windows platform, but doesn't work at all. A use of gdb tells us that the program is starting, but no other messages are displayed.
-- todo : background handlers, managing many Editors to make a complete scenario in one session.
-- current work : ChoiceSelector, Button.
+- todo : background handlers, save functions, displayers in the edit mode.
+- current work : Button.
 - A work around signals and slots like in Qt may be useful.
 
 
@@ -36,6 +36,7 @@ Voice edit mode: select a file just like for the characters.
 
 Music edit mode: select a file just like for the characters.
 
+To switch between editors, use - / +.
 
 When you're done, press escape and enter a fileName.
 
