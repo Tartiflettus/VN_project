@@ -26,7 +26,7 @@ Currently, 4 parameters are editable:
 To switch between modes, use the numpad keys 1 -> 4.
 
 Character edit mode: left and right arrow keys to select another slot to place your character.
-	Then press up to select a file. Enter it in the terminal, and press "enter".
+	Then press up to select a file. Enter it in the window and press "enter".
 	Going to the left if there is no more slot will suppress the last slot.
 	Going to the right if there is no ore slot will add a slot.
 
