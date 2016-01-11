@@ -1,5 +1,9 @@
 #include "FileLoader.hpp"
 #include <iostream>
+#include <SFML/Graphics/RenderWindow.hpp>
+#include "TextBoxStream.hpp"
+#include <string>
+#include <SFML/Window/Event.hpp>
 
 
 std::wstring getBlock(std::wifstream &scenario, wchar_t start, wchar_t end)
@@ -146,11 +150,70 @@ std::string cutPath(const std::string &str)
 
 std::wstring selectFile(const std::wstring& message)
 {
-	std::wcout<< message<< "\n? ";
+	/*std::wcout<< message<< "\n? ";
 
 	std::wstring ans;
 	std::wcin>> ans;
-	return ans;
+	return ans;*/
+
+	std::wstring currentString;
+	std::wstring textBuffer;
+	TextBoxStream curStream(sf::FloatRect(0, 0, 400, 100));
+
+	sf::RenderWindow window(sf::VideoMode(400, 100), message);
+	sf::Event event;
+
+	while(true)
+	{
+		textBuffer.clear();
+		curStream.clear();
+		if(window.waitEvent(event))
+		{
+			if(event.type == sf::Event::Closed ||(
+						event.type == sf::Event::KeyPressed &&
+						(event.key.code == sf::Keyboard::Escape || event.key.code == sf::Keyboard::Return)))
+			{
+				return currentString;
+			}
+			else if(event.type == sf::Event::TextEntered)
+			{
+				textBuffer += event.text.unicode;
+			}
+		}
+
+
+		for(std::size_t i = 0; i < textBuffer.size(); i++)
+		{
+			wchar_t c = textBuffer[i];
+			switch(c)
+			{
+				case 8: //delete
+					{
+						if(!currentString.empty())
+						{
+							currentString.pop_back();
+						}
+						break;
+					}
+				case 27: //echap
+					break;
+				case 13: //enter
+					currentString += L'\n';
+					break;
+				default:
+					currentString += textBuffer[i];
+					break;
+
+			}
+		}
+
+		window.clear(sf::Color::Black);
+
+		curStream<< currentString;
+		window.draw(curStream);
+		
+		window.display();
+	}
 }
 
 

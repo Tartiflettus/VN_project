@@ -34,6 +34,7 @@ namespace edit
 
 
 			Editor(sf::Music& voice, sf::Music& music);
+			Editor(const Editor& editor);
 
 			void handleAction(Action &action);
 

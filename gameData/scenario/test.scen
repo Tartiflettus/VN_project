@@ -1,12 +1,14 @@
 
 [
-character{Batler.png slot 1 1 }
-text{cl 1
-1 }
+character{Batler.png slot 1 2 }
+character{Yamada.png slot 2 2 }
+text{cl  }
+music{hope.ogg }
 ]
 [
-character{Yamada.png slot 2 2 }
-text{cl 2 2 2 2 2 2
-p }
-music{hope.ogg }
+character{Batler.png slot 1 4 }
+character{Batler.png slot 2 4 }
+character{Batler.png slot 3 4 }
+character{Batler.png slot 4 4 }
+text{cl MULTIPLICATION !!!!!!!!!!!! }
 ]

@@ -57,10 +57,11 @@ namespace edit
 	{
 		if(action.nextPressed)
 		{
+			auto itPrev = it;
 			it++;
 			if(it == editors.end())
 			{
-				it = editors.insert(it, Editor(voice, music));
+				it = editors.insert(it, *itPrev);
 			}
 		}
 		if(action.precPressed)

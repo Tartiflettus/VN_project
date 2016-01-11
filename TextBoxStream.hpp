@@ -26,6 +26,7 @@ class TextBoxStream: public sf::Drawable
 {
 	public:
 		TextBoxStream();
+		TextBoxStream(const sf::FloatRect& limits);
 
 		static sf::Font stdFont;
 		static void loadStaticData();
@@ -55,6 +56,8 @@ class TextBoxStream: public sf::Drawable
 		
 		std::wstring m_name;
 		sf::Text m_nameSprite;
+
+		sf::FloatRect m_limits;
 };
 
 

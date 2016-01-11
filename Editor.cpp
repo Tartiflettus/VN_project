@@ -39,6 +39,22 @@ namespace edit
 
 
 
+
+	Editor::Editor(const Editor& editor)
+	{
+		m_currentItem = editor.m_currentItem;
+		m_characters = editor.m_characters;
+		m_curCharacter = editor.m_curCharacter;
+		m_text = editor.m_text;
+		m_voice = editor.m_voice;
+		m_voiceFile = editor.m_voiceFile;
+		m_music = editor.m_music;
+		m_musicFile = editor.m_musicFile;
+		m_displayer = editor.m_displayer;
+		m_characterVertex = editor.m_characterVertex;
+	}
+
+
 	void Editor::loadStaticData()
 	{
 		if(!stdFont.loadFromFile(FONT_PATH + std::string("CANON.ttf")))

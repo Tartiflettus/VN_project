@@ -17,6 +17,24 @@ TextBoxStream::TextBoxStream()
 	m_nameSprite.setColor(sf::Color::White);
 	m_nameSprite.setCharacterSize(25);
 	m_nameSprite.setPosition(NAME_POS);
+
+	m_limits = TEXTBOX_RECT;
+}
+
+
+
+TextBoxStream::TextBoxStream(const sf::FloatRect& limits)
+{
+	m_textSprite.setFont(stdFont);
+	m_textSprite.setColor(sf::Color::White);
+	m_textSprite.setCharacterSize(24);
+	m_textSprite.setPosition(limits.left, limits.top);
+
+	m_nameSprite.setFont(stdFont);
+	m_nameSprite.setCharacterSize(25);
+	m_nameSprite.setPosition(limits.left, limits.top - 25*2);
+
+	m_limits = limits;
 }
 
 
@@ -101,7 +119,7 @@ TextBoxStream& TextBoxStream::operator<<(char c)
 	sf::FloatRect bounds(m_textSprite.getGlobalBounds());
 
 	//verify that we are within the text box
-	if(bounds.left + bounds.width > TEXTBOX_RECT.left + TEXTBOX_RECT.width)
+	if(bounds.left + bounds.width > m_limits.left + m_limits.width)
 	{
 		m_string[m_string.size() - 1] = '\n';
 		m_string += c;
@@ -120,7 +138,7 @@ TextBoxStream& TextBoxStream::operator<<(wchar_t c)
 	sf::FloatRect bounds(m_textSprite.getGlobalBounds());
 
 	//verify that we are within the text box
-	if(bounds.left + bounds.width > TEXTBOX_RECT.left + TEXTBOX_RECT.width)
+	if(bounds.left + bounds.width > m_limits.left + m_limits.width)
 	{
 		m_string[m_string.size() - 1] = L'\n';
 		m_string += c;
