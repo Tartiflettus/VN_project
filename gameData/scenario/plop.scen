@@ -1,4 +1,7 @@
 
 [
+character{Batler.png slot 1 2 }
+character{Yamada.png slot 2 2 }
 text{cl  }
+music{hope.ogg }
 ]
