@@ -230,6 +230,9 @@ namespace edit
 		updateCharacterVertex();
 
 		sf::String displayerString;
+		displayerString += "editor number: ";
+		/* displayerString += */
+		displayerString += "\n";
 		displayerString += "mode: ";
 		displayerString += toString(m_currentItem);
 		displayerString += "\n";
