@@ -11,7 +11,6 @@
 #include "Scene.hpp"
 #include "Timer.hpp"
 
-#include "Button.hpp"
 
 
 namespace game
@@ -156,8 +155,6 @@ namespace game
 
 		Timer loopTimer(sf::seconds(1./60.)); //60 fps
 
-		Button::loadStaticData();
-		Button button(L"Ceci est un bouton ! è_é");
 
 		
 		//main loop
@@ -180,7 +177,6 @@ namespace game
 			window.draw(mainScene);
 			window.draw(textBoxSprite);
 			window.draw(tstream);
-			window.draw(button);
 			
 			window.display();
 
