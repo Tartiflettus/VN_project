@@ -53,26 +53,38 @@ namespace edit
 
 
 
-	void updateEditorArray(EditorArray &editors, EditorArray::iterator& it, Action &action, sf::Music& voice, sf::Music& music)
+	void updateEditorArray(EditorArray &editors, std::size_t& cur, Action &action, sf::Music& voice, sf::Music& music)
 	{
 		if(action.nextPressed)
 		{
-			auto itPrev = it;
-			it++;
-			if(it == editors.end())
+			/* auto itPrev = it; */
+			/* it++; */
+			/* if(it == editors.end()) */
+			/* { */
+			/* 	it = editors.insert(it, *itPrev); */
+			/* } */
+			if(++cur == editors.size()) //adding an element at the end
 			{
-				it = editors.insert(it, *itPrev);
+				editors.push_back(editors[cur-1]);
 			}
 		}
 		if(action.precPressed)
 		{
-			if(it == editors.begin())
+			/* if(it == editors.begin()) */
+			/* { */
+			/* 	it = editors.insert(it, Editor(voice, music)); */
+			/* } */
+			/* else */
+			/* { */
+			/* 	it--; */
+			/* } */
+			if(cur == 0) //adding an element at the beggining
 			{
-				it = editors.insert(it, Editor(voice, music));
+				editors.push_front(Editor(cur, voice, music));
 			}
 			else
 			{
-				it--;
+				cur--;
 			}
 
 		}
@@ -81,13 +93,13 @@ namespace edit
 	}
 
 
-	void updateEditorNumbersFrom(EditorArray& editors, std::size_t cur)
-	{
-		for(std::size_t i = cur; i < editors.size(); i++)
-		{
-			editors[i].setNumber(i);
-		}
-	}
+	/* void updateEditorNumbersFrom(EditorArray& editors, std::size_t cur) */
+	/* { */
+	/* 	for(std::size_t i = cur; i < editors.size(); i++) */
+	/* 	{ */
+	/* 		editors[i].setNumber(i); */
+	/* 	} */
+	/* } */
 
 
 	void getEvents(sf::RenderWindow &window, Action &action)
@@ -209,14 +221,14 @@ namespace edit
 		Editor::loadStaticData();
 
 		EditorArray editorArray;
-		EditorArray::iterator curEditor = editorArray.begin();
+		std::size_t curEditor = 0;
 
 		sf::Music voice;
 		sf::Music music;
 
 		Action action;
 
-		curEditor = editorArray.insert(curEditor, Editor(voice, music));
+		editorArray.push_back(Editor(curEditor, voice, music));
 
 		TextBoxStream::loadStaticData();
 
@@ -240,13 +252,13 @@ namespace edit
 
 			updateEditorArray(editorArray, curEditor, action, voice, music);
 
-			curEditor->handleAction(action);
+			editorArray[curEditor].handleAction(action);
 
-			curEditor->updateDisplayers();
+			editorArray[curEditor].updateDisplayers();
 
 			window.clear(sf::Color::Black);
 
-			window.draw(*curEditor);
+			window.draw(editorArray[curEditor]);
 			window.draw(textBoxSprite);
 			window.draw(tstream);
 

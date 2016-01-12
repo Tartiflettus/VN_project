@@ -31,8 +31,8 @@ namespace edit
 
 	std::string toString(Action::item aItem);
 
-	void updateEditorArray(EditorArray &editors, EditorArray::iterator& it, Action &action, sf::Music& voice, sf::Music& music);
-	void updateEditorNumbersFrom(EditorArray& editors, std::size_t cur);
+	void updateEditorArray(EditorArray &editors, std::size_t& cur, Action &action, sf::Music& voice, sf::Music& music);
+	/* void updateEditorNumbersFrom(EditorArray& editors, std::size_t cur); */
 
 	void saveToFile(EditorArray& editors, const std::string& file);
 

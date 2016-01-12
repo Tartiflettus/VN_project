@@ -4,10 +4,12 @@ character{Yamada.png slot 1 1 }
 text{cl  }
 ]
 [
-character{Batler.png slot 1 2 }
+character{Batler.png slot 1 1 }
 text{cl  }
 ]
 [
-character{Yamada.png slot 1 1 }
+text{cl  }
+]
+[
 text{cl  }
 ]
