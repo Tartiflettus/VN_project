@@ -248,6 +248,10 @@ namespace edit
 		}
 
 		std::wstring saveFile = selectFile(L"select a file to save in");
+		if(saveFile.empty())
+		{
+			saveFile = L"default.scen";
+		}
 
 		saveFile = std::wstring(SCENE_DIRECTORY.begin(), SCENE_DIRECTORY.end()) + saveFile;
 

@@ -310,8 +310,8 @@ namespace edit
 
 		auto bounds = m_characterDisplayer.getGlobalBounds();
 		
-		m_characterDisplayer.setOrigin(bounds.left + bounds.width,
-		bounds.top + bounds.height);
+		m_characterDisplayer.setOrigin(bounds.width, 0);
+		m_characterDisplayer.setPosition(WINDOW_SIZE.x - bounds.width, 0);
 	}
 
 	
