@@ -34,7 +34,7 @@ namespace edit
 
 
 			Editor(sf::Music& voice, sf::Music& music);
-			Editor(const Editor& editor);
+			/* Editor(const Editor& editor); */
 
 			void handleAction(Action &action);
 
@@ -46,6 +46,7 @@ namespace edit
 
 			void updateDisplayers();
 			void updateCharacterVertex();
+			void updateCharacterDisplayer();
 
 
 			void saveToStream(std::wofstream& stream);
@@ -78,8 +79,9 @@ namespace edit
 
 
 			//displayers
-			mutable sf::Text m_displayer;
+			sf::Text m_displayer;
 			sf::VertexArray m_characterVertex;
+			sf::Text m_characterDisplayer;
 	};
 
 } //namespace edit
