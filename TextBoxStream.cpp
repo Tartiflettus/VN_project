@@ -46,7 +46,7 @@ TextBoxStream tstream;
 
 void TextBoxStream::loadStaticData()
 {
-	if(!stdFont.loadFromFile(FONT_PATH + std::string("Pacifico.ttf")))
+	if(!stdFont.loadFromFile(FONT_PATH + std::string("nyala.ttf")))
 	{
 		throw OpenFileError();
 	}

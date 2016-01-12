@@ -35,7 +35,7 @@ bool Button::wasClicked(const sf::Vector2f& pointer) const
 
 void Button::loadStaticData()
 {
-	if(!stdFont.loadFromFile(FONT_PATH + std::string("Pacifico.ttf")))
+	if(!stdFont.loadFromFile(FONT_PATH + std::string("nyala.ttf")))
 	{
 		throw OpenFileError();
 	}

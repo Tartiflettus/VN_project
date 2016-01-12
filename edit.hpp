@@ -11,6 +11,7 @@
 #include "editTypes.hpp"
 #include <list>
 #include "Editor.hpp"
+#include <deque>
 
 
 namespace sf
@@ -21,15 +22,19 @@ namespace sf
 
 namespace edit
 {
+	typedef std::deque<Editor> EditorArray;
+
+
 	void getEvents(sf::RenderWindow &window, Action &action);
 
 	void edit(sf::RenderWindow &window);
 
 	std::string toString(Action::item aItem);
 
-	void updateEditorList(std::list<Editor> &editors, std::list<Editor>::iterator &it, Action &action, sf::Music& voice, sf::Music& music);
+	void updateEditorArray(EditorArray &editors, std::size_t& cur, Action &action, sf::Music& voice, sf::Music& music);
+	/* void updateEditorNumbersFrom(EditorArray& editors, std::size_t cur); */
 
-	void saveToFile(std::list<Editor>& editors, const std::string& file);
+	void saveToFile(EditorArray& editors, const std::string& file);
 
 	//void updateAtomicScene(AtomicScene &scene, Action &action);
 

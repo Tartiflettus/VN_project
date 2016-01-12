@@ -12,7 +12,7 @@ namespace edit
 {
 	sf::Font Editor::stdFont;
 
-	Editor::Editor(sf::Music& voice, sf::Music& music)
+	Editor::Editor(std::size_t& number, sf::Music& voice, sf::Music& music)
 	{
 		m_curCharacter = 0;
 		m_characters.push_back(CharacterInfo(L"", Character()));
@@ -21,6 +21,10 @@ namespace edit
 		m_displayer.setFont(stdFont);
 		m_displayer.setColor(sf::Color::White);
 		m_displayer.setString("mode: \nvoice: \nmusic: ");
+
+		m_characterDisplayer.setFont(stdFont);
+		m_characterDisplayer.setColor(sf::Color::White);
+		updateCharacterDisplayer();
 
 		m_currentItem = Action::invalidItem;
 
@@ -35,24 +39,26 @@ namespace edit
 
 		m_voice = &voice;
 		m_music = &music;
+
+		m_number = &number;
 	}
 
 
 
 
-	Editor::Editor(const Editor& editor)
-	{
-		m_currentItem = editor.m_currentItem;
-		m_characters = editor.m_characters;
-		m_curCharacter = editor.m_curCharacter;
-		m_text = editor.m_text;
-		m_voice = editor.m_voice;
-		m_voiceFile = editor.m_voiceFile;
-		m_music = editor.m_music;
-		m_musicFile = editor.m_musicFile;
-		m_displayer = editor.m_displayer;
-		m_characterVertex = editor.m_characterVertex;
-	}
+	/* Editor::Editor(const Editor& editor) */
+	/* { */
+	/* 	m_currentItem = editor.m_currentItem; */
+	/* 	m_characters = editor.m_characters; */
+	/* 	m_curCharacter = editor.m_curCharacter; */
+	/* 	m_text = editor.m_text; */
+	/* 	m_voice = editor.m_voice; */
+	/* 	m_voiceFile = editor.m_voiceFile; */
+	/* 	m_music = editor.m_music; */
+	/* 	m_musicFile = editor.m_musicFile; */
+	/* 	m_displayer = editor.m_displayer; */
+	/* 	m_characterVertex = editor.m_characterVertex; */
+	/* } */
 
 
 	void Editor::loadStaticData()
@@ -62,6 +68,17 @@ namespace edit
 			std::cerr<< "Unable to load CANON.ttf\n";
 		}
 	}
+
+
+
+
+
+	void Editor::setNumber(std::size_t &number)
+	{
+		m_number = &number;
+	}
+
+
 
 
 	void Editor::handleAction(Action &action)
@@ -228,8 +245,12 @@ namespace edit
 	void Editor::updateDisplayers()
 	{
 		updateCharacterVertex();
+		updateCharacterDisplayer();
 
 		sf::String displayerString;
+		displayerString += "editor number: ";
+		displayerString += std::to_string(*m_number);
+		displayerString += "\n";
 		displayerString += "mode: ";
 		displayerString += toString(m_currentItem);
 		displayerString += "\n";
@@ -288,7 +309,23 @@ namespace edit
 	}
 
 
+	void Editor::updateCharacterDisplayer()
+	{
+		sf::String displayerString;
 
+		displayerString += "slots: ";
+		displayerString += std::to_string(m_characters.size());
+		displayerString += '\n';
+		displayerString += "current: ";
+		displayerString += std::to_string(m_curCharacter + 1);
+
+		m_characterDisplayer.setString(displayerString);
+
+		auto bounds = m_characterDisplayer.getGlobalBounds();
+		
+		m_characterDisplayer.setOrigin(bounds.width, 0);
+		m_characterDisplayer.setPosition(WINDOW_SIZE.x - bounds.width, 0);
+	}
 
 	
 	void Editor::saveToStream(std::wofstream& stream)
@@ -383,8 +420,8 @@ namespace edit
 		tstream.clear();
 		tstream<< m_text;
 
-
 		target.draw(m_displayer, states);
+		target.draw(m_characterDisplayer, states);
 		target.draw(m_characterVertex, states);
 
 		//std::cout<< m_curCharacter<< " : "<< m_characters.size()<<"\n";

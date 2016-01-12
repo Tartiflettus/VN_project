@@ -32,9 +32,14 @@ namespace edit
 			typedef std::list<std::pair<std::wstring, Character> > CharacterList;
 			typedef std::vector<std::pair<std::wstring, Character> > CharacterArray;
 
+			
+			Editor() = delete;
+			Editor(std::size_t& number, sf::Music& voice, sf::Music& music);
+			/* Editor(const Editor& editor); */
 
-			Editor(sf::Music& voice, sf::Music& music);
-			Editor(const Editor& editor);
+
+			void setNumber(std::size_t &number);
+
 
 			void handleAction(Action &action);
 
@@ -46,6 +51,7 @@ namespace edit
 
 			void updateDisplayers();
 			void updateCharacterVertex();
+			void updateCharacterDisplayer();
 
 
 			void saveToStream(std::wofstream& stream);
@@ -76,10 +82,13 @@ namespace edit
 			sf::Music *m_music;
 			std::wstring m_musicFile;
 
+			std::size_t *m_number;
+
 
 			//displayers
-			mutable sf::Text m_displayer;
+			sf::Text m_displayer;
 			sf::VertexArray m_characterVertex;
+			sf::Text m_characterDisplayer;
 	};
 
 } //namespace edit

@@ -53,26 +53,38 @@ namespace edit
 
 
 
-	void updateEditorList(std::list<Editor> &editors, std::list<Editor>::iterator &it, Action &action, sf::Music& voice, sf::Music& music)
+	void updateEditorArray(EditorArray &editors, std::size_t& cur, Action &action, sf::Music& voice, sf::Music& music)
 	{
 		if(action.nextPressed)
 		{
-			auto itPrev = it;
-			it++;
-			if(it == editors.end())
+			/* auto itPrev = it; */
+			/* it++; */
+			/* if(it == editors.end()) */
+			/* { */
+			/* 	it = editors.insert(it, *itPrev); */
+			/* } */
+			if(++cur == editors.size()) //adding an element at the end
 			{
-				it = editors.insert(it, *itPrev);
+				editors.push_back(editors[cur-1]);
 			}
 		}
 		if(action.precPressed)
 		{
-			if(it == editors.begin())
+			/* if(it == editors.begin()) */
+			/* { */
+			/* 	it = editors.insert(it, Editor(voice, music)); */
+			/* } */
+			/* else */
+			/* { */
+			/* 	it--; */
+			/* } */
+			if(cur == 0) //adding an element at the beggining
 			{
-				it = editors.insert(it, Editor(voice, music));
+				editors.push_front(Editor(cur, voice, music));
 			}
 			else
 			{
-				it--;
+				cur--;
 			}
 
 		}
@@ -80,6 +92,14 @@ namespace edit
 		//it->refresh();
 	}
 
+
+	/* void updateEditorNumbersFrom(EditorArray& editors, std::size_t cur) */
+	/* { */
+	/* 	for(std::size_t i = cur; i < editors.size(); i++) */
+	/* 	{ */
+	/* 		editors[i].setNumber(i); */
+	/* 	} */
+	/* } */
 
 
 	void getEvents(sf::RenderWindow &window, Action &action)
@@ -167,7 +187,7 @@ namespace edit
 
 
 
-	void saveToFile(std::list<Editor>& editors, const std::string& file)
+	void saveToFile(EditorArray& editors, const std::string& file)
 	{
 		std::locale::global(std::locale(""));
 		std::wofstream fileStream(file);
@@ -180,7 +200,7 @@ namespace edit
 		fileStream<< L"\n";
 		
 		//write each Editor
-		for(std::list<Editor>::iterator it = editors.begin(); it != editors.end(); it++)
+		for(auto it = editors.begin(); it != editors.end(); it++)
 		{
 			it->saveToStream(fileStream);
 		}
@@ -200,15 +220,15 @@ namespace edit
 
 		Editor::loadStaticData();
 
-		std::list<Editor> editorList;
-		std::list<Editor>::iterator curEditor = editorList.begin();
+		EditorArray editorArray;
+		std::size_t curEditor = 0;
 
 		sf::Music voice;
 		sf::Music music;
 
 		Action action;
 
-		curEditor = editorList.insert(curEditor, Editor(voice, music));
+		editorArray.push_back(Editor(curEditor, voice, music));
 
 		TextBoxStream::loadStaticData();
 
@@ -230,15 +250,15 @@ namespace edit
 		{
 			getEvents(window, action);
 
-			updateEditorList(editorList, curEditor, action, voice, music);
+			updateEditorArray(editorArray, curEditor, action, voice, music);
 
-			curEditor->handleAction(action);
+			editorArray[curEditor].handleAction(action);
 
-			curEditor->updateDisplayers();
+			editorArray[curEditor].updateDisplayers();
 
 			window.clear(sf::Color::Black);
 
-			window.draw(*curEditor);
+			window.draw(editorArray[curEditor]);
 			window.draw(textBoxSprite);
 			window.draw(tstream);
 
@@ -248,11 +268,15 @@ namespace edit
 		}
 
 		std::wstring saveFile = selectFile(L"select a file to save in");
+		if(saveFile.empty())
+		{
+			saveFile = L"default.scen";
+		}
 
 		saveFile = std::wstring(SCENE_DIRECTORY.begin(), SCENE_DIRECTORY.end()) + saveFile;
 
 		std::wcout<< saveFile<< "\n";
-		saveToFile(editorList, std::string(saveFile.begin(), saveFile.end()));
+		saveToFile(editorArray, std::string(saveFile.begin(), saveFile.end()));
 	}
 
 
