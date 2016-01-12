@@ -12,7 +12,7 @@ namespace edit
 {
 	sf::Font Editor::stdFont;
 
-	Editor::Editor(sf::Music& voice, sf::Music& music)
+	Editor::Editor(std::size_t& number, sf::Music& voice, sf::Music& music)
 	{
 		m_curCharacter = 0;
 		m_characters.push_back(CharacterInfo(L"", Character()));
@@ -39,6 +39,8 @@ namespace edit
 
 		m_voice = &voice;
 		m_music = &music;
+
+		m_number = &number;
 	}
 
 
@@ -66,6 +68,17 @@ namespace edit
 			std::cerr<< "Unable to load CANON.ttf\n";
 		}
 	}
+
+
+
+
+
+	void Editor::setNumber(std::size_t &number)
+	{
+		m_number = &number;
+	}
+
+
 
 
 	void Editor::handleAction(Action &action)
@@ -236,7 +249,7 @@ namespace edit
 
 		sf::String displayerString;
 		displayerString += "editor number: ";
-		/* displayerString += */
+		displayerString += std::to_string(*m_number);
 		displayerString += "\n";
 		displayerString += "mode: ";
 		displayerString += toString(m_currentItem);

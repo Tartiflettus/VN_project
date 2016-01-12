@@ -32,8 +32,9 @@ namespace edit
 	std::string toString(Action::item aItem);
 
 	void updateEditorArray(EditorArray &editors, EditorArray::iterator& it, Action &action, sf::Music& voice, sf::Music& music);
+	void updateEditorNumbersFrom(EditorArray& editors, std::size_t cur);
 
-	void saveToFile(std::list<Editor>& editors, const std::string& file);
+	void saveToFile(EditorArray& editors, const std::string& file);
 
 	//void updateAtomicScene(AtomicScene &scene, Action &action);
 

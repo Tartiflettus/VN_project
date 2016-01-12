@@ -81,6 +81,14 @@ namespace edit
 	}
 
 
+	void updateEditorNumbersFrom(EditorArray& editors, std::size_t cur)
+	{
+		for(std::size_t i = cur; i < editors.size(); i++)
+		{
+			editors[i].setNumber(i);
+		}
+	}
+
 
 	void getEvents(sf::RenderWindow &window, Action &action)
 	{
