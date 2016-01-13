@@ -10,20 +10,17 @@ std::mutex SignalMutex;
 
 
 
-void signalLoop(sf::RenderWindow** p_window, EventQueue** p_queue)
+void signalLoop(sf::RenderWindow** p_window)
 {
 	try
 	{
 		SignalMutex.lock();
 
 		*p_window = nullptr;
-		*p_queue = nullptr;
 
-		*p_window = new sf::RenderWindow(sf::VideoMode(WINDOW_SIZE.x, WINDOW_SIZE.y), "Visual Novel");
-		*p_queue = new EventQueue;
+		*p_window = new sf::RenderWindow(sf::VideoMode(WINDOW_SIZE.x, WINDOW_SIZE.y), "test");
 
 		sf::RenderWindow& window = **p_window;
-		EventQueue& queue = **p_queue;
 
 		SignalMutex.unlock();
 
@@ -39,8 +36,6 @@ void signalLoop(sf::RenderWindow** p_window, EventQueue** p_queue)
 
 			SignalMutex.lock();
 
-			queue.push(event); //there might be a deadlock if this function throws exceptions
-
 			finished = !window.isOpen();
 
 			SignalMutex.unlock();
@@ -48,13 +43,11 @@ void signalLoop(sf::RenderWindow** p_window, EventQueue** p_queue)
 
 		std::cout<< "\n\ndelete reached\n\n";
 		delete *p_window;
-		delete *p_queue;
 	}
 	catch(std::exception& except)
 	{
 		std::cerr<< except.what();
 		delete *p_window;
-		delete *p_queue;
 	}
 }
 
