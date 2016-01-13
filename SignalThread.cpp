@@ -24,7 +24,7 @@ void signalLoop(sf::RenderWindow** p_window)
 
 		SignalMutex.unlock();
 
-		std::cout<< "\n\nqueue construite\n\n";
+		std::cout<< "\n\n fenetre construite \n\n";
 
 
 		sf::Event event;

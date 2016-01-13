@@ -16,11 +16,9 @@ int main(int argc, char **argv)
 		std::thread signalThread(signalLoop, p_window);
 		sf::sleep(sf::seconds(1));
 
-		SignalMutex.lock();
 
 		sf::RenderWindow& window = **p_window;
 
-		SignalMutex.unlock();
 
 
 		SignalMutex.lock();
