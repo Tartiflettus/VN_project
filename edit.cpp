@@ -108,6 +108,11 @@ namespace edit
 
 	void getEvents(sf::RenderWindow &window, Action &action, EventQueue& eventQueue)
 	{
+		if(eventQueue.empty())
+		{
+			std::cout<< "\n\nqueue vide\n\n";
+		}
+
 		//reset action
 		action.nextPressed = false;
 		action.precPressed = false;
@@ -222,7 +227,7 @@ namespace edit
 
 
 
-	void edit(sf::RenderWindow &window)
+	void edit(sf::RenderWindow &window, EventQueue& eventQueue)
 	{
 		sf::Time loadingDuration;
 		sf::Clock loadingClock;
@@ -239,7 +244,6 @@ namespace edit
 		sf::Music music;
 
 		Action action;
-		EventQueue eventQueue;
 
 		editorArray.push_back(Editor(curEditor, voice, music));
 
@@ -251,8 +255,6 @@ namespace edit
 			throw OpenFileError();
 		}
 		sf::Sprite textBoxSprite(textBoxTexture);
-
-		std::thread signalThread(signalLoop, &window, &eventQueue);
 
 
 
@@ -271,6 +273,8 @@ namespace edit
 
 			editorArray[curEditor].updateDisplayers();
 
+			SignalMutex.lock();
+
 			window.clear(sf::Color::Black);
 
 			window.draw(editorArray[curEditor]);
@@ -278,6 +282,8 @@ namespace edit
 			window.draw(tstream);
 
 			window.display();
+
+			SignalMutex.unlock();
 
 			loopTimer.autoSleep();
 		}
@@ -298,7 +304,6 @@ namespace edit
 		window.close();
 
 		SignalMutex.unlock();
-		signalThread.join();
 	}
 
 

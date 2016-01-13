@@ -5,6 +5,8 @@
 #define DEF_GAME_HPP
 
 
+#include "SignalThread.hpp"
+
 
 namespace sf
 {
@@ -24,7 +26,7 @@ namespace game
 
 	void getEvents(sf::RenderWindow &window, Action &action);
 
-	void game(sf::RenderWindow &window);
+	void game(sf::RenderWindow &window, EventQueue& eventQueue);
 
 
 } //namespace game

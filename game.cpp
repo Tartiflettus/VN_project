@@ -68,7 +68,7 @@ namespace game
 	}
 
 
-	void game(sf::RenderWindow &window)
+	void game(sf::RenderWindow &window, EventQueue& eventQueue)
 	{
 		sf::Time loadingDuration;
 		sf::Clock loadingClock;
@@ -89,9 +89,6 @@ namespace game
 		{
 			throw OpenFileError();
 		}
-
-		//std::wstring scenarioString = 
-		//L"[character {Batler.png slot 1 1} text {cl blabla bla}] [text {cl Vide intersidéral!! On fait exprès ici une ligne bien trop longue pour la text box afin de tester si elle gère bien les retours à la ligne.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa}][character {Batler.png slot 1 2}character {Yamada.png slot 2 2}text {cl Ceci est un texte de test.}][text {cl Vide intersidéral!! On fait exprès ici une ligne bien trop longue pour la text box afin de tester si elle gère bien les retours à la ligne.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa}][character{Batler.png slot 2 2}text {app Ceci en est la suite.}][character {}text {cl Salutations, utilisateur !!} ][]";
 
 
 		TextBoxStream::loadStaticData();

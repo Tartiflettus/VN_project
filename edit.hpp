@@ -28,7 +28,7 @@ namespace edit
 
 	void getEvents(sf::RenderWindow &window, Action &action, EventQueue& eventQueue);
 
-	void edit(sf::RenderWindow &window);
+	void edit(sf::RenderWindow &window, EventQueue& eventQueue);
 
 	std::string toString(Action::item aItem);
 
