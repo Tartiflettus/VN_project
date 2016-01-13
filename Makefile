@@ -1,8 +1,8 @@
 SYSCONF_LINK = g++
 CPPFLAGS     =
 CPPFLAGS     = -g -std=c++11
-LDFLAGS      = -g
-LIBS         = -lsfml-audio -lsfml-graphics -lsfml-window -lsfml-system
+LDFLAGS      = -g -std=c++11
+LIBS         = -lsfml-audio -lsfml-graphics -lsfml-window -lsfml-system -lpthread
 
 
 DESTDIR = ./

@@ -12,6 +12,7 @@
 #include <list>
 #include "Editor.hpp"
 #include <deque>
+#include "SignalThread.hpp"
 
 
 namespace sf
@@ -25,7 +26,7 @@ namespace edit
 	typedef std::deque<Editor> EditorArray;
 
 
-	void getEvents(sf::RenderWindow &window, Action &action);
+	void getEvents(sf::RenderWindow &window, Action &action, EventQueue& eventQueue);
 
 	void edit(sf::RenderWindow &window);
 

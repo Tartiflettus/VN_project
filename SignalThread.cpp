@@ -9,17 +9,20 @@ std::mutex SignalMutex;
 
 
 
-void signalLoop(sf::RenderWindow& window, EventQueue& queue)
+void signalLoop(sf::RenderWindow* window, EventQueue* queue)
 {
 	sf::Event event;
+	bool finished = false;
 
-	while(true)
+	while(!finished)
 	{
-		window.waitEvent(event);
+		window->waitEvent(event);
 			
 		SignalMutex.lock();
 
-		queue.push(event); //there might be a deadlock if this function throws exceptions
+		queue->push(event); //there might be a deadlock if this function throws exceptions
+
+		finished = !window->isOpen();
 
 		SignalMutex.unlock();
 	}

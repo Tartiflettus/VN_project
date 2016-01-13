@@ -17,7 +17,7 @@ namespace sf
 extern std::mutex SignalMutex;
 
 
-void signalLoop(sf::RenderWindow& window, EventQueue& queue);
+void signalLoop(sf::RenderWindow *window, EventQueue *queue);
 
 
 

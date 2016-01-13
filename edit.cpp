@@ -8,6 +8,10 @@
 #include <fstream>
 
 
+#include "SignalThread.hpp"
+#include <thread>
+
+
 namespace edit
 {
 	
@@ -102,7 +106,7 @@ namespace edit
 	/* } */
 
 
-	void getEvents(sf::RenderWindow &window, Action &action)
+	void getEvents(sf::RenderWindow &window, Action &action, EventQueue& eventQueue)
 	{
 		//reset action
 		action.nextPressed = false;
@@ -112,9 +116,15 @@ namespace edit
 		action.v = 0;
 		action.textBuffer.clear();
 
+
 		sf::Event event;
-		while(window.pollEvent(event))
+
+		SignalMutex.lock();
+
+		while(!eventQueue.empty())
 		{
+			event = eventQueue.front();
+			eventQueue.pop();
 			switch(event.type)
 			{
 				case sf::Event::Closed:
@@ -175,6 +185,8 @@ namespace edit
 			}
 		}
 
+		SignalMutex.unlock();
+
 		//verify if we want to take the next or prec Editor
 		action.precPressed = action.aItem != Action::text && action.textBuffer.find(L'-') != std::wstring::npos;
 
@@ -227,6 +239,7 @@ namespace edit
 		sf::Music music;
 
 		Action action;
+		EventQueue eventQueue;
 
 		editorArray.push_back(Editor(curEditor, voice, music));
 
@@ -239,6 +252,8 @@ namespace edit
 		}
 		sf::Sprite textBoxSprite(textBoxTexture);
 
+		std::thread signalThread(signalLoop, &window, &eventQueue);
+
 
 
 		std::cout<<".. Finished !\n";
@@ -248,7 +263,7 @@ namespace edit
 
 		while(!action.closeRequest)
 		{
-			getEvents(window, action);
+			getEvents(window, action, eventQueue);
 
 			updateEditorArray(editorArray, curEditor, action, voice, music);
 
@@ -277,6 +292,13 @@ namespace edit
 
 		std::wcout<< saveFile<< "\n";
 		saveToFile(editorArray, std::string(saveFile.begin(), saveFile.end()));
+
+		SignalMutex.lock();
+		
+		window.close();
+
+		SignalMutex.unlock();
+		signalThread.join();
 	}
 
 
