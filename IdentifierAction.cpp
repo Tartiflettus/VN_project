@@ -332,22 +332,31 @@ void IdentifierText::operator()(AtomicScene &scene)
 
 
 
-IdentifierSelector::IdentifierSelector()
+IdentifierButton::IdentifierButton()
 {
 }
 
 
 
 
-void  IdentifierSelector::operator()(AtomicScene &scene)
+void  IdentifierButton::operator()(AtomicScene &scene)
 {
-	std::cout<< "selector found\n";
+	std::cout<< "button found\n";
 
 	std::wstring block = scene.getCurrentBlock();
 	std::wstring::size_type cur = scene.getCursorPos();
 
 
+	std::wstring arg1 = firstArg(block, cur);
+	if(!arg1.empty()) //Contains an expression that transforms variables
+	{
+		std::wstring msg;
+		std::size_t posEnd = block.find(L'}', cur);
+		msg.resize(posEnd - cur);
+		std::copy(block.begin()+cur, block.begin()+posEnd, msg.begin());
 
+		scene.addButton(Button(msg, arg1));
+	}
 
 
 	cur = block.find(L'}', cur) + 1;

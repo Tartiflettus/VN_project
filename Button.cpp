@@ -4,8 +4,9 @@
 #include "OpenFileError.hpp"
 
 
-Button::Button(const std::wstring& msg)
+Button::Button(const std::wstring& msg, const std::wstring& expr)
 {
+	m_expression = expr;
 	m_sprite.setFillColor(sf::Color::White);
 	initText();
 	m_text.setString(msg);
@@ -34,6 +35,18 @@ sf::Font Button::stdFont;
 sf::FloatRect Button::getGlobalBounds() const
 {
 	return m_sprite.getGlobalBounds();
+}
+
+
+
+void Button::setExpression(const std::wstring& expr)
+{
+	m_expression = expr;
+}
+
+std::wstring Button::getExpression() const
+{
+	return m_expression;
 }
 
 

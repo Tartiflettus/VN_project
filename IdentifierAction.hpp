@@ -86,10 +86,10 @@ class IdentifierText: public IdentifierAction
 };
 
 
-class IdentifierSelector: public IdentifierAction
+class IdentifierButton: public IdentifierAction
 {
 	public:
-		IdentifierSelector();
+		IdentifierButton();
 
 		virtual void  operator()(AtomicScene &scene);
 };

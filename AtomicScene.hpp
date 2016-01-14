@@ -30,6 +30,7 @@ class AtomicScene
 		typedef std::map<std::wstring, std::unique_ptr<IdentifierAction> > IdAction;
 		typedef IdAction::iterator IdActionIterator;
 
+
 		AtomicScene(const std::wstring &filePiece);
 
 		
@@ -58,6 +59,8 @@ class AtomicScene
 		void setMusic(const Music &music);
 		Music getMusic() const;
 
+		void addButton(const Button& button);
+		ButtonArray getButtons() const;
 	
 
 	private:
@@ -71,6 +74,8 @@ class AtomicScene
 		Music m_music;
 
 		Voice m_voice;
+
+		ButtonArray m_buttons;
 
 		std::wstring m_currentBlock;
 		std::wstring::size_type m_cursorPos;

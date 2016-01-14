@@ -9,4 +9,5 @@ music{hope.ogg }
 character{Yamada.png slot 1 1 }
 text{cl COUCOU }
 music{hope.ogg }
+button{a=1 Sauver les patates}
 ]

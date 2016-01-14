@@ -82,7 +82,8 @@ namespace game
 		loadingDuration = loadingClock.getElapsedTime();
 
 		std::cout<< "Loading ...\n";
-
+		
+		Button::loadStaticData();
 		AtomicScene::loadStaticData();
 		Action action;
 
