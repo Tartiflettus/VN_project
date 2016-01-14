@@ -88,8 +88,12 @@ void Scene::draw(sf::RenderTarget &target, sf::RenderStates states) const
 	}
 	//std::cout<< cpt<< "\n";
 
-	target.draw(tstream);
-
+	target.draw(tstream, states);
+	
+	for(std::size_t i = 0; i < m_buttons.size(); i++)
+	{
+		target.draw(m_buttons[i], states);
+	}
 }
 
 
@@ -145,6 +149,7 @@ void Scene::loadNextAtomicScene()
 	updateText();
 	updateMusic();
 	updateVoice();
+	updateButtons();
 }
 
 
@@ -170,6 +175,7 @@ void Scene::firstUpdate()
 	updateText();
 	updateMusic();
 	updateVoice();
+	updateButtons();
 }
 
 
@@ -324,6 +330,22 @@ void Scene::updateVoice()
 	tstream.clearName();
 	tstream.setName(currentScene.getName());
 }
+
+
+
+void Scene::updateButtons()
+{
+	if(m_atomicScenes.empty())
+	{
+		return;
+	}
+
+	AtomicScene& currentScene(m_atomicScenes.front());
+
+	m_buttons.clear();
+	m_buttons = currentScene.getButtons();
+}
+
 
 
 

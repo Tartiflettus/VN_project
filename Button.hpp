@@ -22,9 +22,12 @@ namespace sf
 class Button: public sf::Drawable, public sf::Transformable
 {
 	public:
-		Button(const std::wstring& msg = std::wstring());
+		Button(const std::wstring& msg = std::wstring(), const std::wstring& expr = std::wstring());
 		
-		bool wasClicked(const sf::Vector2f& pointer) const;
+		sf::FloatRect getGlobalBounds() const;
+
+		void setExpression(const std::wstring& expr);
+		std::wstring getExpression() const;
 
 		static void loadStaticData();
 
@@ -40,7 +43,12 @@ class Button: public sf::Drawable, public sf::Transformable
 
 		sf::RectangleShape m_sprite;
 		sf::Text m_text;
+
+		std::wstring m_expression;
 };
+
+
+bool collision(const sf::Vector2f& point, const Button& b);
 
 
 

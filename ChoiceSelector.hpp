@@ -8,7 +8,7 @@
 
 #include <SFML/Graphics/Drawable.hpp>
 #include <SFML/Graphics/RenderStates.hpp>
-
+#include "Button.hpp"
 
 
 namespace sf
@@ -21,12 +21,18 @@ namespace sf
 class ChoiceSelector: public sf::Drawable
 {
 	public:
+		typedef std::vector<Button> ButtonArray;
+
 		ChoiceSelector();
+		
+		Button& operator[](std::size_t i);
+		const Button& operator[](std::size_t i) const;
 
 	protected:
 		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 	private:
+		ButtonArray m_buttons;
 
 };
 

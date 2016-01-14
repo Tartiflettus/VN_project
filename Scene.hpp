@@ -21,6 +21,7 @@
 #include "AtomicScene.hpp"
 #include "SceneTypes.hpp"
 #include "TextBoxStream.hpp"
+#include "Button.hpp"
 
 
 namespace sf
@@ -67,15 +68,19 @@ class Scene: public sf::Drawable
 		void updateText();
 		void updateMusic();
 		void updateVoice();
+		void updateButtons();
 
 
 		AtomScens m_atomicScenes;
+
 		CharactersPtrList m_characters;
 		CharactersPtrList m_previousCharacters;
 
 		sf::Music m_music;
 
 		sf::Music m_voice;
+
+		ButtonArray m_buttons;
 
 		//Text m_text;
 		mutable bool m_textUpdated;
