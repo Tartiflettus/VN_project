@@ -1,5 +1,12 @@
 
 [
 character{Batler.png slot 1 1 }
-text{cl  }
+text{cl Salutations!!!!!!
+AAAAAAAAA }
+music{hope.ogg }
+]
+[
+character{Yamada.png slot 1 1 }
+text{cl COUCOU }
+music{hope.ogg }
 ]

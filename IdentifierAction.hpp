@@ -86,6 +86,15 @@ class IdentifierText: public IdentifierAction
 };
 
 
+class IdentifierSelector: public IdentifierAction
+{
+	public:
+		IdentifierSelector();
+
+		virtual void  operator()(AtomicScene &scene);
+};
+
+
 
 #endif //DEF_IDENTIFIERACTION_HPP
 

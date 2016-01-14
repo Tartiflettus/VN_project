@@ -332,5 +332,31 @@ void IdentifierText::operator()(AtomicScene &scene)
 
 
 
+IdentifierSelector::IdentifierSelector()
+{
+}
+
+
+
+
+void  IdentifierSelector::operator()(AtomicScene &scene)
+{
+	std::cout<< "selector found\n";
+
+	std::wstring block = scene.getCurrentBlock();
+	std::wstring::size_type cur = scene.getCursorPos();
+
+
+
+
+
+	cur = block.find(L'}', cur) + 1;
+
+	scene.setCursorPos(cur);
+}
+
+
+
+
 
 
