@@ -344,6 +344,12 @@ void Scene::updateButtons()
 
 	m_buttons.clear();
 	m_buttons = currentScene.getButtons();
+
+	//place the buttons on the screen
+	for(std::size_t i = 0; i < m_buttons.size(); i++)
+	{
+
+	}
 }
 
 
