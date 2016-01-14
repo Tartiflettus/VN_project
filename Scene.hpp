@@ -70,8 +70,11 @@ class Scene: public sf::Drawable
 
 
 		AtomScens m_atomicScenes;
+
 		CharactersPtrList m_characters;
 		CharactersPtrList m_previousCharacters;
+
+
 
 		sf::Music m_music;
 

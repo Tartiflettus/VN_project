@@ -26,6 +26,7 @@ namespace game
 		//reset action
 		action.nextPressed = false;
 		action.closeRequest = false;
+		action.clicks.clear();
 
 		sf::Event event;
 		while(window.pollEvent(event))
@@ -53,14 +54,20 @@ namespace game
 					break;
 				case sf::Event::KeyReleased:
 					break;
-				/* case sf::Event::MouseButtonPressed: */
-				/* 	switch(event.mouseButton.button) */
-				/* 	{ */
-				/* 		case sf::Mouse::Left: */
-							
-				/* 			break; */
-				/* 	} */
-				/* 	break; */
+				case sf::Event::MouseButtonPressed:
+					switch(event.mouseButton.button)
+					{
+						case sf::Mouse::Left:
+						{
+							sf::Vector2i curClick(event.mouseButton.x, event.mouseButton.y);
+
+							action.clicks.push_back(window.mapPixelToCoords(curClick));
+							break;
+						}
+						default:
+							break;
+					}
+					break;
 				default:
 					break;
 			}
