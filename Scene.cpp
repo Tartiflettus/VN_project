@@ -71,6 +71,39 @@ void Scene::loadFromString(const std::wstring &string)
 
 
 
+void Scene::handleClicks(const ClickArray& clicks)
+{
+	for(std::size_t i = 0; i < clicks.size(); i++)
+	{
+		for(std::size_t j = 0; j < m_buttons.size(); j++)
+		{
+			if(collision(clicks[i], m_buttons[j]))
+			{
+				std::cout<< "Click detected\n";
+			}
+		}
+	}
+}
+
+
+
+
+void Scene::setPrior(bool prior)
+{
+	m_prior = prior;	
+}
+
+
+bool Scene::prior()
+{
+	return m_prior;
+}
+
+
+
+
+
+
 void Scene::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
 	//unsigned int cpt = 0;
@@ -88,7 +121,7 @@ void Scene::draw(sf::RenderTarget &target, sf::RenderStates states) const
 	}
 	//std::cout<< cpt<< "\n";
 
-	target.draw(tstream, states);
+	//target.draw(tstream, states);
 	
 	for(std::size_t i = 0; i < m_buttons.size(); i++)
 	{
@@ -345,9 +378,33 @@ void Scene::updateButtons()
 	m_buttons.clear();
 	m_buttons = currentScene.getButtons();
 
+	if(!m_buttons.empty())
+	{
+		setPrior(true);
+	}
+	else
+	{
+		setPrior(false);
+	}
+
 	//place the buttons on the screen
+	float maxWidth = 0;
 	for(std::size_t i = 0; i < m_buttons.size(); i++)
 	{
+		auto bounds = m_buttons[i].getGlobalBounds();
+
+		m_buttons[i].setPosition(0, ((WINDOW_SIZE.y / float(m_buttons.size()+1))*float(i+1)) - (bounds.height/2.) );
+		
+		if(bounds.width > maxWidth)
+		{
+			maxWidth = bounds.width;
+		}
+	}
+
+	for(std::size_t i = 0; i < m_buttons.size(); i++)
+	{
+		m_buttons[i].setWidth(maxWidth);
+		m_buttons[i].setPosition( (WINDOW_SIZE.x / 2) - (maxWidth / 2), m_buttons[i].getPosition().y );
 
 	}
 }

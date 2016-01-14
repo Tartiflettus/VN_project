@@ -179,12 +179,16 @@ namespace game
 			{
 				mainScene.loadNextAtomicScene();
 			}
+			mainScene.handleClicks(action.clicks);
 
 			window.clear(sf::Color::Black);
 
 			window.draw(mainScene);
-			window.draw(textBoxSprite);
-			window.draw(tstream);
+			if(!mainScene.prior())
+			{
+				window.draw(textBoxSprite);
+				window.draw(tstream);
+			}
 			
 			window.display();
 
