@@ -6,9 +6,7 @@ Because our lives are difficult, a scenario editor is available, but perhaps dif
 
 Current state of the project:
 - Compiles without problem on windows platform, but doesn't work at all. A use of gdb tells us that the program is starting, but no other messages are displayed.
-- todo : background handlers, save functions, displayers in the edit mode.
-- current work : Button.
-- A work around signals and slots like in Qt may be useful.
+- todo : background handlers, save functions, route choices.
 
 
 HOW TO USE THIS SOFTWARE:
