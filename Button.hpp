@@ -12,6 +12,8 @@
 #include <SFML/Graphics/Font.hpp>
 
 
+
+
 namespace sf
 {
 	class RenderTarget;
@@ -25,6 +27,8 @@ class Button: public sf::Drawable, public sf::Transformable
 		Button(const std::wstring& msg = std::wstring(), const std::wstring& expr = std::wstring());
 		
 		sf::FloatRect getGlobalBounds() const;
+
+		void setWidth(float w);
 
 		void setExpression(const std::wstring& expr);
 		std::wstring getExpression() const;
@@ -46,6 +50,9 @@ class Button: public sf::Drawable, public sf::Transformable
 
 		std::wstring m_expression;
 };
+
+
+typedef std::vector<sf::Vector2f> ClickArray;
 
 
 bool collision(const sf::Vector2f& point, const Button& b);

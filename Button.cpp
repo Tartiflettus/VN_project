@@ -34,7 +34,18 @@ sf::Font Button::stdFont;
 
 sf::FloatRect Button::getGlobalBounds() const
 {
-	return m_sprite.getGlobalBounds();
+	auto bounds = m_sprite.getGlobalBounds();
+	
+	return getTransform().transformRect(bounds);
+}
+
+
+
+void Button::setWidth(float w)
+{
+	float height = m_sprite.getSize().y;
+
+	m_sprite.setSize(sf::Vector2f(w, height));
 }
 
 
@@ -88,9 +99,9 @@ void Button::updateDisplay()
 	sf::FloatRect bounds(m_text.getGlobalBounds());
 
 	sf::Vector2f textSize(bounds.width, bounds.height);
-	m_sprite.setSize(textSize + sf::Vector2f(30*2, 20*2));
+	m_sprite.setSize(textSize + sf::Vector2f(30*2, 15*2));
 
-	m_text.setPosition(m_sprite.getPosition() + sf::Vector2f(30, 20));
+	m_text.setPosition(m_sprite.getPosition() + sf::Vector2f(30, 15));
 }
 
 

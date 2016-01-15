@@ -24,6 +24,7 @@
 #include "Button.hpp"
 
 
+
 namespace sf
 {
 	class RenderTarget;
@@ -50,6 +51,13 @@ class Scene: public sf::Drawable
 		
 		static std::map<std::wstring, sf::Texture> charactersTextures;
 		static sf::Texture& requestCharacterTexture(const std::wstring& file);
+
+		void handleClicks(const ClickArray& clicks);
+
+		void interpret(const std::wstring& expr);
+		
+		void setPrior(bool prior);
+		bool prior();
 
 		void loadNextAtomicScene();
 
@@ -81,6 +89,8 @@ class Scene: public sf::Drawable
 		sf::Music m_voice;
 
 		ButtonArray m_buttons;
+
+		bool m_prior;
 
 		//Text m_text;
 		mutable bool m_textUpdated;

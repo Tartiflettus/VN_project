@@ -27,6 +27,9 @@ std::map<std::wstring, std::unique_ptr<IdentifierAction> >
 
 
 
+VarMap varMap;
+
+
 
 
 AtomicScene::AtomicScene(const std::wstring &filePiece)
