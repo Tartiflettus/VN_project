@@ -14,8 +14,15 @@
 #include "Text.hpp"
 #include "Music.hpp"
 #include "Voice.hpp"
+#include <utility> //pair
 
 
+
+typedef std::map<std::wstring, int> VarMap;
+
+
+
+extern VarMap varMap;
 
 
 

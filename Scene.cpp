@@ -80,8 +80,42 @@ void Scene::handleClicks(const ClickArray& clicks)
 			if(collision(clicks[i], m_buttons[j]))
 			{
 				std::cout<< "Click detected\n";
+				interpret(m_buttons[j].getExpression());
+				std::cout<< varMap[L"a"]<< "\n";
 			}
 		}
+	}
+}
+
+
+
+
+void Scene::interpret(const std::wstring& expr)
+{
+	std::size_t i;
+
+	std::wstring var;
+
+	//search the variable name
+	for(i = 0; i < expr.size(); i++)
+	{
+		if(L'A' <= expr[i] && expr[i] <= L'z')
+		{
+			var += expr[i];
+		}
+		else
+		{
+			break;
+		}
+	}
+
+	//assign its value
+	if(expr[i] == L'=')
+	{
+		i++;
+		std::wstring value;
+		value = expr.substr(i);
+		varMap[var] = std::stoi(value);
 	}
 }
 

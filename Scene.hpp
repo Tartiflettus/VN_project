@@ -53,6 +53,8 @@ class Scene: public sf::Drawable
 		static sf::Texture& requestCharacterTexture(const std::wstring& file);
 
 		void handleClicks(const ClickArray& clicks);
+
+		void interpret(const std::wstring& expr);
 		
 		void setPrior(bool prior);
 		bool prior();
