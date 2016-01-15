@@ -10,6 +10,7 @@
 #include <SFML/Graphics/Texture.hpp>
 #include "Music.hpp"
 #include "Voice.hpp"
+#include "ScenarioSelector.hpp"
 
 #include "assertsOn.hpp"
 #include <cassert>
@@ -365,6 +366,38 @@ void  IdentifierButton::operator()(AtomicScene &scene)
 }
 
 
+
+
+
+IdentifierSelector::IdentifierSelector()
+{
+}
+
+
+
+void IdentifierSelector::operator()(AtomicScene& scene)
+{
+	std::cout<< "selector found\n";
+
+	std::wstring block = scene.getCurrentBlock();
+	std::wstring::size_type cur = scene.getCursorPos();
+
+
+	std::vector<std::wstring> args(extractArgs(block, cur, L'{', L'}'));
+	if(args.size() >= 2)
+	{
+		//first arg = expr
+		ScenarioSelector selector;
+		selector.setExpression(args[0]);
+		
+		//second arg = scenario file
+		selector.setScenario(args[1]);
+	}
+
+
+	//cur = block.find(L'}', cur) + 1;
+	scene.setCursorPos(cur);
+}
 
 
 
