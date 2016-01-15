@@ -18,6 +18,7 @@ void AtomicScene::loadStaticData()
 	m_identifierArray[std::wstring(L"sound")] = std::unique_ptr<IdentifierAction>(new IdentifierSound);
 	m_identifierArray[std::wstring(L"text")] = std::unique_ptr<IdentifierAction>(new IdentifierText);
 	m_identifierArray[std::wstring(L"button")] = std::unique_ptr<IdentifierAction>(new IdentifierButton);
+	m_identifierArray[std::wstring(L"selector")] = std::unique_ptr<IdentifierAction>(new IdentifierSelector);
 }
 
 

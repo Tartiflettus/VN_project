@@ -13,3 +13,6 @@ button{a=1 Sauver les patates}
 button{a=2 Ne pas sauver les patates}
 button{a=3 Sauver les endives}
 ]
+[
+selector{a==1 patate.scen }
+]
