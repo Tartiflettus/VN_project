@@ -185,6 +185,22 @@ ButtonArray AtomicScene::getButtons() const
 
 
 
+
+void AtomicScene::addSelector(const ScenarioSelector& selector)
+{
+	m_selectors.push_back(selector);
+}
+
+SelectorArray AtomicScene::getSelectors() const
+{
+	return m_selectors;
+}
+
+
+
+
+
+
 std::wstring::size_type AtomicScene::actIf(AtomicScene::IdAction &identifiers, const std::wstring &filePiece, std::wstring::size_type pos)
 {
 	std::wstring::size_type cur; //current

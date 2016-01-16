@@ -8,11 +8,11 @@ music{hope.ogg }
 [
 character{Yamada.png slot 1 1 }
 text{cl COUCOU }
-music{hope.ogg }
 button{a=1 Sauver les patates}
 button{a=2 Ne pas sauver les patates}
 button{a=3 Sauver les endives}
 ]
 [
-selector{a==1 patate.scen }
+selector{a==1 patate.scen}
+selector{a==2 no_patate.scen}
 ]

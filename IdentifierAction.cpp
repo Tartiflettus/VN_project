@@ -392,6 +392,8 @@ void IdentifierSelector::operator()(AtomicScene& scene)
 		
 		//second arg = scenario file
 		selector.setScenario(args[1]);
+
+		scene.addSelector(selector);
 	}
 
 

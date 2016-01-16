@@ -27,6 +27,10 @@ Scene::~Scene()
 
 void Scene::loadFromStream(std::wifstream &stream)
 {
+	while(!m_atomicScenes.empty())
+	{
+		m_atomicScenes.pop();
+	}
 	std::wstring currentBlock;
 
 	do
@@ -49,6 +53,10 @@ void Scene::loadFromStream(std::wifstream &stream)
 
 void Scene::loadFromString(const std::wstring &string)
 {
+	while(!m_atomicScenes.empty())
+	{
+		m_atomicScenes.pop();
+	}
 	std::wstring currentBlock;
 	std::size_t pos = 0;
 
@@ -117,6 +125,64 @@ void Scene::interpret(const std::wstring& expr)
 		value = expr.substr(i);
 		varMap[var] = std::stoi(value);
 	}
+}
+
+
+
+bool Scene::interpretAsBool(const std::wstring& expr)
+{
+	std::size_t i;
+
+	std::wstring var;
+
+	//search the variable name
+	for(i = 0; i < expr.size(); i++)
+	{
+		if(L'A' <= expr[i] && expr[i] <= L'z')
+		{
+			var += expr[i];
+		}
+		else
+		{
+			break;
+		}
+	}
+
+	//search what comparison operator is being used
+	if(expr.find(L"==") != std::wstring::npos)
+	{
+		std::size_t posValue = expr.find_first_not_of(L"=<>!", i);
+		std::wstring value;
+		value = expr.substr(posValue);
+		if(varMap[var] == std::stoi(value))
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+
+
+std::string Scene::getNextScenarioFile()
+{
+	return std::string(m_nextFile.begin(), m_nextFile.end());
+}
+
+
+
+bool Scene::finished() const
+{
+	return !m_nextFile.empty();
+}
+
+
+
+void Scene::prepareForNext()
+{
+	m_music.stop();
+	m_voice.stop();
 }
 
 
@@ -217,6 +283,7 @@ void Scene::loadNextAtomicScene()
 	updateMusic();
 	updateVoice();
 	updateButtons();
+	updateSelectors();
 }
 
 
@@ -243,6 +310,7 @@ void Scene::firstUpdate()
 	updateMusic();
 	updateVoice();
 	updateButtons();
+	updateSelectors();
 }
 
 
@@ -442,6 +510,32 @@ void Scene::updateButtons()
 
 	}
 }
+
+
+
+
+void Scene::updateSelectors()
+{
+	if(m_atomicScenes.empty())
+	{
+		return;
+	}
+
+	AtomicScene& currentScene(m_atomicScenes.front());
+	SelectorArray curSelectors(currentScene.getSelectors());
+
+	m_nextFile.clear();
+	for(std::size_t i = 0; i < curSelectors.size(); i++)
+	{
+		if(interpretAsBool(curSelectors[i].getExpression()))
+		{
+			m_nextFile = curSelectors[i].getScenario();
+			prepareForNext();
+		}
+	}
+}
+
+
 
 
 

@@ -6,6 +6,7 @@
 #define DEF_SCENARIOSELECTOR_HPP
 
 #include <string>
+#include <vector>
 
 
 class ScenarioSelector
@@ -23,6 +24,10 @@ class ScenarioSelector
 		std::wstring m_expression;
 		std::wstring m_scenario;
 };
+
+
+
+typedef std::vector<ScenarioSelector> SelectorArray;
 
 
 
