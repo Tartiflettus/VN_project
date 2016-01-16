@@ -55,6 +55,11 @@ class Scene: public sf::Drawable
 		void handleClicks(const ClickArray& clicks);
 
 		void interpret(const std::wstring& expr);
+		bool interpretAsBool(const std::wstring& expr);
+
+		std::string getNextScenarioFile();
+		bool finished() const;
+
 		
 		void setPrior(bool prior);
 		bool prior();
@@ -77,7 +82,9 @@ class Scene: public sf::Drawable
 		void updateMusic();
 		void updateVoice();
 		void updateButtons();
+		void updateSelectors();
 
+		void prepareForNext();
 
 		AtomScens m_atomicScenes;
 
@@ -89,6 +96,8 @@ class Scene: public sf::Drawable
 		sf::Music m_voice;
 
 		ButtonArray m_buttons;
+
+		std::wstring m_nextFile;
 
 		bool m_prior;
 
