@@ -158,7 +158,7 @@ namespace edit
 
 
 			curFile = selectFile(L"Select a character file");
-			curFile = CHARACTER_PATH + m_characters[m_curCharacter].first;
+			//curFile = CHARACTER_PATH + m_characters[m_curCharacter].first;
 
 			curCharacter.setTexture(Scene::requestCharacterTexture(curFile));
 		}
@@ -357,7 +357,7 @@ namespace edit
 
 			stream<< L"character{";
 			
-			stream<< cutPath(curFile);
+			stream<< curFile;
 
 			auto slots = curCharacter.getSlot();
 			if(slots.second != 0) //there are indeed slots

@@ -11,6 +11,7 @@
 #include "Music.hpp"
 #include "Voice.hpp"
 #include "ScenarioSelector.hpp"
+#include "Background.hpp"
 
 #include "assertsOn.hpp"
 #include <cassert>
@@ -170,22 +171,8 @@ void IdentifierCharacter::operator()(AtomicScene &scene)
 	
 	if(args.size() >= 1 && args[0].rfind(L".png", args[0].size()) != std::wstring::npos)
 	{
-		texMap::iterator it;
-		it = Scene::charactersTextures.find(args[0]);
-		if(it != Scene::charactersTextures.end())
-		{
-			newChar->setTexture(it->second);
-		}
-		else
-		{
-			//load the texture if not already done
-			sf::Texture tex;
-			std::wstring fileStr(CHARACHTER_DIRECTORY + args[0]);
-			tex.loadFromFile(std::string(fileStr.begin(), fileStr.end()));
-			Scene::charactersTextures[args[0]] = tex;
-			newChar->setTexture(Scene::charactersTextures[args[0]]);
-		}
-
+		sf::Texture& tex = Scene::requestCharacterTexture(args[0]);
+		newChar->setTexture(tex);
 	}
 	if(args.size() >= 4)
 	{
@@ -199,8 +186,6 @@ void IdentifierCharacter::operator()(AtomicScene &scene)
 		}
 	}
 
-	//lower the character's dimension
-	//newChar->setScale(0.5, 0.5);
 
 	scene.addCharacter(newChar);
 
@@ -400,6 +385,42 @@ void IdentifierSelector::operator()(AtomicScene& scene)
 	//cur = block.find(L'}', cur) + 1;
 	scene.setCursorPos(cur);
 }
+
+
+
+
+
+IdentifierBackground::IdentifierBackground()
+{
+}
+
+
+
+void IdentifierBackground::operator()(AtomicScene& scene)
+{
+	std::cout<< "selector found\n";
+
+	/* std::wstring block = scene.getCurrentBlock(); */
+	/* std::wstring::size_type cur = scene.getCursorPos(); */
+
+	
+	/* std::wstring arg1 = firstArg(block, cur); */
+
+	/* if(!arg1.empty()) */
+	/* { */
+	/* 	Background background; */
+	/* 	std::wstring fileStr = BACKGROUND_PATH + arg1; */
+	/* 	sf::Texture& tex = Scene::requestCharacterTexture(fileStr); */
+	/* 	background.setTexture(tex); */
+	/* } */
+
+
+	/* //cur = block.find(L'}', cur) + 1; */
+	/* scene.setCursorPos(cur); */
+
+}
+
+
 
 
 

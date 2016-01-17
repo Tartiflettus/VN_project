@@ -104,5 +104,15 @@ class IdentifierSelector: public IdentifierAction
 };
 
 
+class IdentifierBackground: public IdentifierAction
+{
+	public:
+		IdentifierBackground();
+
+		virtual void operator()(AtomicScene& scene);
+};
+
+
+
 #endif //DEF_IDENTIFIERACTION_HPP
 
