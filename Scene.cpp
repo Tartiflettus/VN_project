@@ -240,6 +240,7 @@ std::map<std::wstring, sf::Texture> Scene::charactersTextures;
 sf::Texture& Scene::requestCharacterTexture(const std::wstring& file)
 {
 	std::string cfile(file.begin(), file.end());
+	cfile = std::string(CHARACTER_PATH .begin(), CHARACTER_PATH.end())+ cfile;
 
 	texMap::iterator it;
 	it = charactersTextures.find(file);
