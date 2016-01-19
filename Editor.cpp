@@ -98,6 +98,9 @@ namespace edit
 			case Action::music:
 				handleMusic(action);
 				break;
+			case Action::background:
+				handleBackground(action);
+				break;
 			default:
 				break;
 		}
@@ -240,8 +243,13 @@ namespace edit
 	}
 
 
-	void handleBackground(Action& action)
+	void Editor::handleBackground(Action& action)
 	{
+		if(action.v > 0)
+		{
+			m_bgFile = selectFile(L"Select a background file");
+			m_bg.setTexture(Scene::requestBgTexture(m_bgFile));
+		}
 	}
 
 

@@ -163,6 +163,10 @@ namespace edit
 							action.aItem = Action::music;
 							std::cout<< "music selected\n";
 							break;
+						case sf::Keyboard::Numpad5:
+							action.aItem = Action::background;
+							std::cout<< "background selected\n";
+							break;
 						default:
 							break;
 					}
