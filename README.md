@@ -6,7 +6,7 @@ Because our lives are difficult, a scenario editor is available, but perhaps dif
 
 Current state of the project:
 - Compiles without problem on windows platform, but doesn't work at all. A use of gdb tells us that the program is starting, but no other messages are displayed.
-- todo : background handlers, save functions, route choices.
+- todo : background edit, save functions.
 
 
 HOW TO USE THIS SOFTWARE:
@@ -34,7 +34,7 @@ Voice edit mode: select a file just like for the characters.
 
 Music edit mode: select a file just like for the characters.
 
-To switch between editors, use - / +.
+To switch between editors, use - / +. (disabled in text edit mode)
 
 When you're done, press escape and enter a fileName.
 
