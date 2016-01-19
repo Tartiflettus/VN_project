@@ -2,6 +2,7 @@
 #include <SFML/Graphics/RenderTarget.hpp>
 #include "AtomicScene.hpp"
 #include "FileLoader.hpp"
+#include "Background.hpp"
 #include <string>
 
 #include <iostream>
@@ -258,6 +259,35 @@ sf::Texture& Scene::requestCharacterTexture(const std::wstring& file)
 	}
 
 }
+
+
+
+Scene::BgTextures Scene::backgroundTextures;
+
+sf::Texture& Scene::requestBgTexture(const std::wstring& file)
+{
+	std::string cfile(file.begin(), file.end());
+	cfile = std::string(BACKGROUND_PATH.begin(), BACKGROUND_PATH.end())+ cfile;
+
+	texMap::iterator it;
+	it = backgroundTextures.find(file);
+	if(it != backgroundTextures.end())
+	{
+		return it->second;
+	}
+	else
+	{
+		//load the texture if not already done
+		sf::Texture tex;
+		tex.loadFromFile(cfile);
+		backgroundTextures[file] = tex;
+		return backgroundTextures[file];
+	}
+	
+}
+
+
+
 
 
 

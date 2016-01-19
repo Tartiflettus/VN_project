@@ -398,26 +398,25 @@ IdentifierBackground::IdentifierBackground()
 
 void IdentifierBackground::operator()(AtomicScene& scene)
 {
-	std::cout<< "selector found\n";
+	std::cout<< "background found\n";
 
-	/* std::wstring block = scene.getCurrentBlock(); */
-	/* std::wstring::size_type cur = scene.getCursorPos(); */
+	std::wstring block = scene.getCurrentBlock();
+	std::wstring::size_type cur = scene.getCursorPos();
 
 	
-	/* std::wstring arg1 = firstArg(block, cur); */
+	std::wstring arg1 = firstArg(block, cur);
 
-	/* if(!arg1.empty()) */
-	/* { */
-	/* 	Background background; */
-	/* 	std::wstring fileStr = BACKGROUND_PATH + arg1; */
-	/* 	sf::Texture& tex = Scene::requestCharacterTexture(fileStr); */
-	/* 	background.setTexture(tex); */
-	/* } */
+	if(!arg1.empty())
+	{
+		Background background;
+		sf::Texture& tex = Scene::requestBgTexture(arg1);
+		background.setTexture(tex);
+		scene.setBackground(background);
+	}
 
 
-	/* //cur = block.find(L'}', cur) + 1; */
-	/* scene.setCursorPos(cur); */
-
+	cur = block.find(L'}', cur) + 1;
+	scene.setCursorPos(cur);
 }
 
 

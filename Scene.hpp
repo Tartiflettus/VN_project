@@ -42,6 +42,7 @@ class Scene: public sf::Drawable
 		//types////////////////////////////////////
 
 		typedef std::queue<AtomicScene> AtomScens;
+		typedef std::map<std::wstring, sf::Texture> BgTextures;
 
 		Scene();
 		~Scene();
@@ -51,6 +52,10 @@ class Scene: public sf::Drawable
 		
 		static std::map<std::wstring, sf::Texture> charactersTextures;
 		static sf::Texture& requestCharacterTexture(const std::wstring& file);
+
+		static BgTextures backgroundTextures;
+		static sf::Texture& requestBgTexture(const std::wstring& file);
+		
 
 		void handleClicks(const ClickArray& clicks);
 

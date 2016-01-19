@@ -14,6 +14,7 @@
 #include "Text.hpp"
 #include "Music.hpp"
 #include "Voice.hpp"
+#include "Background.hpp"
 #include <utility> //pair
 #include "ScenarioSelector.hpp"
 
@@ -72,6 +73,9 @@ class AtomicScene
 
 		void addSelector(const ScenarioSelector& selector);
 		SelectorArray getSelectors() const;
+
+		void setBackground(const Background& bg);
+		Background getBackground() const;
 	
 
 	private:
@@ -89,6 +93,8 @@ class AtomicScene
 		ButtonArray m_buttons;
 
 		SelectorArray m_selectors;
+
+		Background m_bg;
 
 		std::wstring m_currentBlock;
 		std::wstring::size_type m_cursorPos;
