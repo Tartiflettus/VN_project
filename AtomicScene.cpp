@@ -200,12 +200,12 @@ SelectorArray AtomicScene::getSelectors() const
 
 
 
-void AtomicScene::setBackground(const Background& bg)
+void AtomicScene::setBackground(const BackgroundPtr& bg)
 {
 	m_bg = bg;
 }
 
-Background AtomicScene::getBackground() const
+BackgroundPtr AtomicScene::getBackground() const
 {
 	return m_bg;
 }

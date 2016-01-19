@@ -22,6 +22,8 @@
 #include "SceneTypes.hpp"
 #include "TextBoxStream.hpp"
 #include "Button.hpp"
+#include "Background.hpp"
+
 
 
 
@@ -88,6 +90,7 @@ class Scene: public sf::Drawable
 		void updateVoice();
 		void updateButtons();
 		void updateSelectors();
+		void updateBackground();
 
 		void prepareForNext();
 
@@ -101,6 +104,8 @@ class Scene: public sf::Drawable
 		sf::Music m_voice;
 
 		ButtonArray m_buttons;
+
+		Background m_background;
 
 		std::wstring m_nextFile;
 

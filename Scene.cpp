@@ -184,6 +184,7 @@ void Scene::prepareForNext()
 {
 	m_music.stop();
 	m_voice.stop();
+	//TODO : remove background when entering a new scene
 }
 
 
@@ -207,6 +208,7 @@ bool Scene::prior()
 
 void Scene::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
+	target.draw(m_background, states);
 	//unsigned int cpt = 0;
 	for(CharactersPtrList::const_iterator it = m_characters.begin(); it != m_characters.end(); it++)
 	{
@@ -342,6 +344,7 @@ void Scene::firstUpdate()
 	updateVoice();
 	updateButtons();
 	updateSelectors();
+	updateBackground();
 }
 
 
@@ -567,6 +570,22 @@ void Scene::updateSelectors()
 }
 
 
+
+void Scene::updateBackground()
+{
+	if(m_atomicScenes.empty())
+	{
+		return;
+	}
+
+	AtomicScene& currentScene(m_atomicScenes.front());
+	BackgroundPtr curBg(currentScene.getBackground());
+
+	if(curBg) //no calculations if there isn't a new background
+	{
+		m_background = *curBg;
+	}
+}
 
 
 

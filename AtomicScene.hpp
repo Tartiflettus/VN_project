@@ -74,8 +74,8 @@ class AtomicScene
 		void addSelector(const ScenarioSelector& selector);
 		SelectorArray getSelectors() const;
 
-		void setBackground(const Background& bg);
-		Background getBackground() const;
+		void setBackground(const BackgroundPtr& bg);
+		BackgroundPtr getBackground() const;
 	
 
 	private:
@@ -94,7 +94,7 @@ class AtomicScene
 
 		SelectorArray m_selectors;
 
-		Background m_bg;
+		BackgroundPtr m_bg;
 
 		std::wstring m_currentBlock;
 		std::wstring::size_type m_cursorPos;

@@ -408,9 +408,9 @@ void IdentifierBackground::operator()(AtomicScene& scene)
 
 	if(!arg1.empty())
 	{
-		Background background;
+		BackgroundPtr background = BackgroundPtr(new Background);
 		sf::Texture& tex = Scene::requestBgTexture(arg1);
-		background.setTexture(tex);
+		background->setTexture(tex);
 		scene.setBackground(background);
 	}
 
