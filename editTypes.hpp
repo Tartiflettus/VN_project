@@ -13,6 +13,7 @@ namespace edit
 			text,
 			voice,
 			music,
+			background,
 			invalidItem
 		};
 

@@ -1,12 +1,5 @@
 
 [
-character{Batler.png slot 1 3 }
-character{Yamada.png slot 3 3 }
-text{cl Que le pouvoir de la force soit avec les patates. }
-]
-[
-character{Batler.png slot 1 3 }
-character{Yamada.png slot 3 3 }
-text{cl Que le pouvoir de la force soit avec les patates.
-Ça marchera ? Ça marchera pas ? Blblblblblbllllllllllll ! }
+character{Yamada.png slot 1 1 }
+text{cl  }
 ]

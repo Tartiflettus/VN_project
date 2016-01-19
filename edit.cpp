@@ -27,6 +27,9 @@ namespace edit
 			case Action::music:
 				return std::string("music");
 				break;
+			case Action::background:
+				return std::string("background");
+				break;
 			default:
 				return std::string("invalid Item");
 				break;

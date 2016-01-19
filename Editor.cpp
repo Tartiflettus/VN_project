@@ -240,6 +240,9 @@ namespace edit
 	}
 
 
+	void handleBackground(Action& action)
+	{
+	}
 
 
 	void Editor::updateDisplayers()
@@ -259,6 +262,9 @@ namespace edit
 		displayerString += "\n";
 		displayerString += "music: ";
 		displayerString += m_musicFile;
+		displayerString += "\n";
+		displayerString += "background: ";
+		displayerString += m_bgFile;
 
 		m_displayer.setString(displayerString);
 	}
@@ -341,6 +347,7 @@ namespace edit
 		saveText(stream);
 		saveVoice(stream);
 		saveMusic(stream);
+		saveBackground(stream);
 
 		stream<< L"]\n";
 	}
@@ -408,6 +415,19 @@ namespace edit
 			stream<< L" }\n";
 		}
 	}
+
+	void Editor::saveBackground(std::wofstream& stream)
+	{
+		if(!m_bgFile.empty())
+		{
+			stream<< L"background{";
+
+			stream<< m_bgFile;
+
+			stream<< L" }\n";
+		}
+	}
+
 
 
 

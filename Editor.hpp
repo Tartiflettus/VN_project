@@ -47,6 +47,7 @@ namespace edit
 			void handleText(Action &action);
 			void handleVoice(Action &action);
 			void handleMusic(Action &action);
+			void handleBackground(Action& action);
 
 
 			void updateDisplayers();
@@ -59,6 +60,7 @@ namespace edit
 			void saveText(std::wofstream& stream);
 			void saveVoice(std::wofstream& stream);
 			void saveMusic(std::wofstream& stream);
+			void saveBackground(std::wofstream& stream);
 
 			static void loadStaticData();
 
@@ -81,6 +83,9 @@ namespace edit
 
 			sf::Music *m_music;
 			std::wstring m_musicFile;
+
+			Background m_bg;
+			std::wstring m_bgFile;
 
 			std::size_t *m_number;
 
