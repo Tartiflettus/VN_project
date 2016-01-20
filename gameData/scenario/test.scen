@@ -4,3 +4,10 @@ character{Batler.png slot 2 2 }
 text{cl Dare desu ka? }
 background{New_York.png }
 ]
+[
+button{a=1 Mangez des patates}
+button{a=2 Ne mangez pas des patates}
+selector{a==1 no_patate.scen}
+selector{a==2 patate.scen}
+]
+

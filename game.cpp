@@ -175,18 +175,10 @@ namespace game
 			{
 				break;
 			}
-			if(action.nextPressed)
-			{
-				mainScene.loadNextAtomicScene();
-				if(mainScene.finished())
-				{
-					mainScenario.close();
-					mainScenario.open(SCENE_DIRECTORY + mainScene.getNextScenarioFile());
-					mainScene.loadFromStream(mainScenario);
-				}
-			}
-			mainScene.handleClicks(action.clicks);
 
+			mainScene.handleClicks(action.clicks);
+			mainScene.handleNextPressed(action.nextPressed, mainScenario);
+			
 			window.clear(sf::Color::Black);
 
 			window.draw(mainScene);

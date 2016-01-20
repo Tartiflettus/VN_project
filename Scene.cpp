@@ -10,6 +10,7 @@
 Scene::Scene()
 {
 	m_textUpdated = false;
+	m_chosen = false;
 }
 
 
@@ -90,8 +91,27 @@ void Scene::handleClicks(const ClickArray& clicks)
 			{
 				std::cout<< "Click detected\n";
 				interpret(m_buttons[j].getExpression());
+				m_chosen = true;
 				std::cout<< varMap[L"a"]<< "\n";
 			}
+		}
+	}
+}
+
+
+
+
+void Scene::handleNextPressed(bool pressed, std::wifstream& stream)
+{
+	if(pressed || m_chosen)
+	{
+		loadNextAtomicScene();
+		if(finished())
+		{
+			stream.close();
+			stream.open(SCENE_DIRECTORY + getNextScenarioFile());
+			loadFromStream(stream);
+			m_nextFile.clear();
 		}
 	}
 }
@@ -184,7 +204,6 @@ void Scene::prepareForNext()
 {
 	m_music.stop();
 	m_voice.stop();
-	//TODO : remove background when entering a new scene
 }
 
 
@@ -309,7 +328,6 @@ void Scene::loadNextAtomicScene()
 	m_atomicScenes.pop();
 
 	m_textUpdated = false;
-
 	
 	updateCharacters(m_previousCharacters);
 	updateText();
@@ -558,7 +576,7 @@ void Scene::updateSelectors()
 	AtomicScene& currentScene(m_atomicScenes.front());
 	SelectorArray curSelectors(currentScene.getSelectors());
 
-	m_nextFile.clear();
+	//m_nextFile.clear();
 	for(std::size_t i = 0; i < curSelectors.size(); i++)
 	{
 		if(interpretAsBool(curSelectors[i].getExpression()))

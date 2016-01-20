@@ -60,6 +60,7 @@ class Scene: public sf::Drawable
 		
 
 		void handleClicks(const ClickArray& clicks);
+		void handleNextPressed(bool pressed, std::wifstream& stream);
 
 		void interpret(const std::wstring& expr);
 		bool interpretAsBool(const std::wstring& expr);
@@ -110,6 +111,7 @@ class Scene: public sf::Drawable
 		std::wstring m_nextFile;
 
 		bool m_prior;
+		bool m_chosen; //button clicked
 
 		//Text m_text;
 		mutable bool m_textUpdated;
