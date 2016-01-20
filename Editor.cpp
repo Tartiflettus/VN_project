@@ -441,6 +441,7 @@ namespace edit
 
 	void Editor::draw(sf::RenderTarget &target, sf::RenderStates states) const
 	{
+		target.draw(m_bg);
 		for(size_t i = 0; i < m_characters.size(); i++)
 		{
 			target.draw(m_characters[i].second, states);
