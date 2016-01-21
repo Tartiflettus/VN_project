@@ -7,6 +7,9 @@
 
 #include <iostream>
 
+#include "assertsOn.hpp"
+#include <cassert>
+
 Scene::Scene()
 {
 	m_textUpdated = false;
@@ -92,7 +95,7 @@ void Scene::handleClicks(const ClickArray& clicks)
 				std::cout<< "Click detected\n";
 				interpret(m_buttons[j].getExpression());
 				m_chosen = true;
-				std::cout<< varMap[L"a"]<< "\n";
+				//std::cout<< varMap[L"a"]<< "\n";
 			}
 		}
 	}
@@ -103,10 +106,13 @@ void Scene::handleClicks(const ClickArray& clicks)
 
 void Scene::handleNextPressed(bool pressed, std::wifstream& stream)
 {
-	if(pressed || m_chosen)
+	assert(!(m_chosen && m_buttons.empty()));
+	
+	if((pressed && m_buttons.empty()) || //simply want to continue
+		m_chosen) //button clicked
 	{
 		loadNextAtomicScene();
-		if(finished())
+		if(finished()) //no next file specified
 		{
 			stream.close();
 			stream.open(SCENE_DIRECTORY + getNextScenarioFile());
@@ -114,6 +120,7 @@ void Scene::handleNextPressed(bool pressed, std::wifstream& stream)
 			m_nextFile.clear();
 		}
 	}
+	m_chosen = false; //no button pressed by default
 }
 
 
