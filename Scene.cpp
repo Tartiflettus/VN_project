@@ -12,7 +12,7 @@
 
 
 
-#ifdef _WIN32
+/*#ifdef _WIN32
 
 #include <sstream>
 namespace std
@@ -30,7 +30,7 @@ int stoi(std::wstring s)
 }
 
 
-#endif
+#endif*/
 
 
 

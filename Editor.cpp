@@ -9,7 +9,7 @@
 
 
 
-#ifdef _WIN32
+/*#ifdef _WIN32
 #include <sstream>
 
 namespace std
@@ -24,7 +24,7 @@ std::string to_string(std::size_t nb)
 
 
 }
-#endif
+#endif*/
 
 
 namespace edit

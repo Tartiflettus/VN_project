@@ -29,7 +29,7 @@ IdentifierAction::~IdentifierAction()
 
 
 
-#ifdef _WIN32 //stof and other funtions are not available yet on windows
+/*#ifdef _WIN32 //stof and other funtions are not available yet on windows
 
 #include <sstream>
 
@@ -52,7 +52,7 @@ namespace std
 	}
 }
 
-#endif
+#endif*/
 
 
 
