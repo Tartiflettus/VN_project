@@ -8,6 +8,25 @@
 #include <iostream>
 
 
+
+#ifdef _WIN32
+#include <sstream>
+
+namespace std
+{
+
+std::string to_string(std::size_t nb)
+{
+	std::stringstream ss;
+	ss<< nb;
+	return ss.str();
+}
+
+
+}
+#endif
+
+
 namespace edit
 {
 	sf::Font Editor::stdFont;

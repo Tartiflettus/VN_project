@@ -10,6 +10,30 @@
 #include "assertsOn.hpp"
 #include <cassert>
 
+
+
+#ifdef _WIN32
+
+#include <sstream>
+namespace std
+{
+
+int stoi(std::wstring s)
+{
+	int ans;
+	std::wstringstream ss;
+	ss<< s;
+	ss>> ans;
+	return ans;
+}	
+	
+}
+
+
+#endif
+
+
+
 Scene::Scene()
 {
 	m_textUpdated = false;
